@@ -1,0 +1,1039 @@
+{
+  "id": "6305569281116558310",
+  "form_id": "242508927461461",
+  "ip": "103.244.177.111",
+  "created_at": "2025-08-09 09:56:19",
+  "status": "ACTIVE",
+  "new": "1",
+  "flag": "0",
+  "notes": "",
+  "updated_at": null,
+  "answers": {
+    "1": {
+      "name": "ltpgtltspanStylecolor",
+      "order": "1",
+      "text": "<p style=\"text-align: center;\"><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-08_080436_11120SSA-338020ADL.pdf.66dd147b065804.94852656.png\" alt=\"\" /></p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 12pt;\"><strong>READ ALL OF THIS INFORMATION BEFORE<br />YOU BEGIN COMPLETING THIS FORM </strong></span></p>\r\n<p style=\"text-align: center;\"><strong>IF YOU NEED HELP</strong></p>\r\n<p>If you need help with this form, complete as much of it as you can and call the phone number provided on the letter sent with the form, or contact the person who asked you to complete the form. If you need the address or phone number for the office that provided the form, you can get it by calling Social Security at 1-800-772-1213 (TTY 1-800-325-0778).</p>\r\n<p style=\"text-align: center;\"><strong>HOW TO COMPLETE THIS FORM</strong></p>\r\n<p>The information that you give on this form will be used to make a decision on the disabled person's claim. You can help by completing as much of the form as you can. When a question refers to the \"disabled person,\" it refers to the person who is applying for or receiving disability benefits.</p>\r\n<p>It is important that you tell us what you know about the disabled person's activities and abilities.</p>\r\n<ul style=\"list-style-type: square;\">\r\n<li>Print or type.</li>\r\n<li><strong>DO NOT LEAVE ANSWERS BLANK.</strong> If you do not know the answer or the answer is \"none\" or \"does not apply,\" please write \"don't know\" or \"none\" or \"does not apply.\"</li>\r\n<li>Do not ask a doctor or hospital to complete this form.</li>\r\n<li>Be sure to explain an answer if the question asks for an explanation, or if you think you need to explain an answer.</li>\r\n<li>If more space is needed to answer any questions, use the \"REMARKS\" section on Page 10, and show the number of the question being answered.</li>\r\n<li>If a specific activity is performed with the help of others, please indicate that.</li>\r\n</ul>",
+      "type": "control_text"
+    },
+    "188": {
+      "name": "submit",
+      "order": "147",
+      "text": "Submit",
+      "type": "control_button"
+    },
+    "190": {
+      "name": "1Name",
+      "order": "6",
+      "text": "1. NAME OF DISABLED PERSON",
+      "type": "control_textbox",
+      "answer": "Nabs"
+    },
+    "193": {
+      "name": "input193",
+      "order": "10",
+      "text": "<p>3. <strong>YOUR DAYTIME TELEPHONE NUMBER</strong> <em>(If there is no telephone number where you can be reached, please give us a daytime number where we can leave a message for you.) </em></p>",
+      "type": "control_text"
+    },
+    "313": {
+      "name": "typeA",
+      "order": "142",
+      "text": "Remarks",
+      "type": "control_textarea"
+    },
+    "317": {
+      "name": "name317",
+      "order": "143",
+      "text": "Name of person completing this form:",
+      "type": "control_textbox",
+      "answer": "Nabs, Xaitmi, Man"
+    },
+    "319": {
+      "name": "mailingAddress",
+      "order": "146",
+      "sublabels": "{\"addr_line1\":\"Number and Street\",\"addr_line2\":\"Street Address Line 2\",\"city\":\"City\",\"state\":\"State \\/ Province\",\"postal\":\"Postal \\/ Zip Code\",\"country\":\"Country\"}",
+      "text": "MAILING ADDRESS (Street or PO Box) Include the apartment number, if applicable.",
+      "type": "control_address",
+      "answer": {
+        "addr_line1": "St. 41",
+        "addr_line2": "",
+        "city": "Austin",
+        "state": "Texas",
+        "postal": "12345"
+      },
+      "prettyFormat": "Number and Street: St. 41<br>City: Austin<br>State / Province: Texas<br>Postal / Zip Code: 12345<br>"
+    },
+    "327": {
+      "countryCode": "No",
+      "inputMask": "disable",
+      "inputMaskValue": "(###) ###-####",
+      "name": "primary327",
+      "order": "11",
+      "sublabels": "{\"country\":\"Country Code\",\"area\":\"Area Code\",\"phone\":\"Phone Number\",\"full\":\"Phone Number\",\"masked\":\"Please enter a valid phone number.\"}",
+      "text": "Primary:",
+      "type": "control_phone",
+      "answer": {
+        "area": "123",
+        "phone": "786-1515"
+      },
+      "prettyFormat": "(123) 786-1515"
+    },
+    "350": {
+      "name": "pageBreak350",
+      "order": "2",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "351": {
+      "name": "ltpStyletextalign351",
+      "order": "3",
+      "text": "<p style=\"text-align: center;\"><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_172333_Form203P20(1)20(2).pdf.66dee8fe566c01.48187181.png\" alt=\"\" /></p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\"><strong>Privacy Act Statements<br />Collection and Use of Personal Information </strong></span> </p>\r\n<p>Sections 205(a), 223(d), 1631(d)(1), and 1631(e)(1) of the Social Security Act, as amended, allow us to collect this information. Furnishing us this information is voluntary. However, failing to provide all or part of the information may prevent an accurate and timely decision on any disability claim filed.</p>\r\n<p>We will use the information you provide to make a determination of eligibility for benefits. We may also share your information for the following purposes, called routine uses:</p>\r\n<p>• To contractors and other Federal agencies, as necessary, for the purpose of assisting the Social Security Administration (SSA) in the efficient administration of its programs. We will disclose information under this routine use only in situations in which we may enter into a contractual or similar agreement to obtain assistance in accomplishing an SSA function relating to this system of records; and</p>\r\n<p>• To applicants, claimants, prospective applicants or claimants, other than the data subject, their authorized representatives or representative payees to the extent necessary to pursue Social Security claims and to representative payees when the information pertains to individuals for whom they serve as representative payees, for the purpose of assisting SSA in administering its representative payment responsibilities under the Social Security Act and assisting the representative payees in performing their duties as payees, including receiving and accounting for benefits for individuals for whom they serve as payees.</p>\r\n<p>In addition, we may share this information in accordance with the Privacy Act and other Federal laws. For example, where authorized, we may use and disclose this information in computer matching programs, in which our records are compared with other records to establish or verify a person’s eligibility for Federal benefit programs and for repayment of incorrect or delinquent debts under these programs.</p>\r\n<p>A list of additional routine uses is available in our Privacy Act System of Records Notices (SORN) 60-0089, entitled Claims Folders System, as published in the Federal Register (FR) on October 31, 2019, at 84 FR 58422, and 60-0320, entitled Electronic Disability Claim File, as published in the FR on June 4, 2020, at 85 FR 34477. Additional information, and a full listing of all of our SORNs, is available on our website at <a href=\"http://www.ssa.gov/privacy\" target=\"_blank\" rel=\"nofollow\">www.ssa.gov/privacy</a>.</p>\r\n<p><strong>Paperwork Reduction Act Statement -</strong> This information collection meets the requirements of 44 U.S.C. § 3507, as amended by section 2 of the <span style=\"text-decoration: underline;\">Paperwork Reduction Act of 1995</span>. You do not need to answer these questions unless we display a valid Office of Management and Budget (OMB) control number. We estimate that it will take about 61 minutes to read the instructions, gather the facts, and answer the questions. <em><strong>Send <span style=\"text-decoration: underline;\">only</span> comments regarding this burden estimate or any other aspect of this collection, including suggestions for reducing this burden to:</strong></em> <em>SSA, 6401 Security Blvd, Baltimore, MD 21235-6401.</em></p>",
+      "type": "control_text"
+    },
+    "352": {
+      "name": "pageBreak352",
+      "order": "4",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "353": {
+      "name": "input353",
+      "order": "5",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-08_095733_11120SSA-338020ADL.pdf.66dd2f17d60011.98973832.png\" alt=\"\" /></p>\r\n<p><em>Anyone who makes or causes to be made a false statement or representation of material fact for use in determining a payment under the Social Security Act, or knowingly conceals or fails to disclose an event with an intent to affect an initial or continued right to payment, commits a crime punishable under Federal law by fine, imprisonment, or both, and may be subject to administrative sanctions.</em></p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 14pt;\"><strong>SECTION A - GENERAL INFORMATION</strong></span></p>",
+      "type": "control_text"
+    },
+    "354": {
+      "name": "typeA354",
+      "order": "12",
+      "text": "",
+      "type": "control_checkbox",
+      "answer": ["Your Number"],
+      "prettyFormat": "Your Number"
+    },
+    "355": {
+      "name": "4aWheredoyouliveCheckone",
+      "order": "16",
+      "text": "7. a. Where does the disabled person live? (Check one.)",
+      "type": "control_checkbox",
+      "answer": {
+        "other": "Villa"
+      },
+      "prettyFormat": "Villa"
+    },
+    "356": {
+      "name": "bWith",
+      "order": "17",
+      "text": "b. With whom does he/she live? (Check one.)",
+      "type": "control_checkbox",
+      "answer": ["With Family"],
+      "prettyFormat": "With Family"
+    },
+    "357": {
+      "name": "input357",
+      "order": "18",
+      "text": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt;\">SECTION B - INFORMATION ABOUT ILLNESSES, INJURIES, OR CONDITIONS </span></strong></p>",
+      "type": "control_text"
+    },
+    "358": {
+      "name": "8How",
+      "order": "19",
+      "text": "8. How does this person's illnesses, injuries, or conditions limit his/her ability to work?",
+      "type": "control_textarea",
+      "answer": "None."
+    },
+    "359": {
+      "name": "ltpStyletextalign359",
+      "order": "21",
+      "text": "<p style=\"text-align: center;\"><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_172449_Form203P20(1)20(2).pdf.66dee9450b4218.85233077.png\" alt=\"\" /></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt;\">SECTION C - INFORMATION ABOUT DAILY ACTIVITIES </span></strong></p>",
+      "type": "control_text"
+    },
+    "360": {
+      "name": "9Describe",
+      "order": "22",
+      "text": "9. Describe what the disabled person does from the time he/she wakes up until going to bed.",
+      "type": "control_textarea",
+      "answer": "Everything."
+    },
+    "361": {
+      "name": "10Does",
+      "order": "23",
+      "text": "10. Does this person take care of anyone else such as a wife/husband, children, grandchildren, parents, friend, other?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "362": {
+      "name": "11Does",
+      "order": "25",
+      "text": "11. Does he/she take care of pets or other animals?",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "363": {
+      "name": "ifyes",
+      "order": "24",
+      "text": "If \"YES,\" for whom does he/she care, and what does he/she do for them?",
+      "type": "control_textarea"
+    },
+    "364": {
+      "name": "12Does",
+      "order": "27",
+      "text": "12. Does anyone help this person care for other people or animals?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "365": {
+      "name": "ifyes365",
+      "order": "26",
+      "text": "If \"YES,\" what does he/she do for them?",
+      "type": "control_textarea",
+      "answer": "Take care of dogs."
+    },
+    "366": {
+      "name": "14Do",
+      "order": "30",
+      "text": "14. Do the illnesses, injuries, or conditions affect his/her sleep?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "367": {
+      "name": "ifyes367",
+      "order": "28",
+      "text": "If \"YES,\" who helps, and what do they do to help?",
+      "type": "control_textarea"
+    },
+    "368": {
+      "name": "13What",
+      "order": "29",
+      "text": "13. What was the disabled person able to do before his/her illnesses, injuries, or conditions that he/she can't do now?",
+      "type": "control_textarea",
+      "answer": "Do everything."
+    },
+    "369": {
+      "name": "15Personal",
+      "order": "32",
+      "text": "15. PERSONAL CARE: Does the disabled person have PROBLEMS with personal care?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "370": {
+      "name": "ifyes370",
+      "order": "31",
+      "text": "If \"YES,\" how?",
+      "type": "control_textarea"
+    },
+    "371": {
+      "name": "input371",
+      "order": "33",
+      "text": "<p><strong><span style=\"font-size: 12pt;\">a. Explain how the illnesses, injuries, or conditions affect this person's ability to: </span></strong></p>",
+      "type": "control_text"
+    },
+    "372": {
+      "name": "12Do372",
+      "order": "43",
+      "text": "b. Does he/she need any special reminders to take care of personal needs and grooming?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "373": {
+      "name": "dress",
+      "order": "34",
+      "text": "Dress:",
+      "type": "control_textarea"
+    },
+    "374": {
+      "name": "bathe",
+      "order": "35",
+      "text": "Bathe:",
+      "type": "control_textarea"
+    },
+    "375": {
+      "name": "careFor",
+      "order": "36",
+      "text": "Care for hair:",
+      "type": "control_textarea"
+    },
+    "376": {
+      "name": "shave",
+      "order": "37",
+      "text": "Shave:",
+      "type": "control_textarea"
+    },
+    "377": {
+      "name": "feedSelf",
+      "order": "38",
+      "text": "Feed self:",
+      "type": "control_textarea"
+    },
+    "378": {
+      "name": "useThe",
+      "order": "39",
+      "text": "Use the toilet:",
+      "type": "control_textarea"
+    },
+    "379": {
+      "name": "other",
+      "order": "40",
+      "text": "Other:",
+      "type": "control_textarea"
+    },
+    "383": {
+      "name": "input383",
+      "order": "42",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_172541_Form203P20(1)20(2).pdf.66dee97aac65d3.58070651.png\" alt=\"\" /></p>",
+      "type": "control_text"
+    },
+    "384": {
+      "name": "cDoes",
+      "order": "45",
+      "text": "c. Does he/she need help or reminders taking medicine?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "385": {
+      "name": "ifyes385",
+      "order": "44",
+      "text": "If \"YES,\" what type of help or reminders are needed?",
+      "type": "control_textarea"
+    },
+    "386": {
+      "name": "aDoes",
+      "order": "48",
+      "text": "a. Does the disabled person prepare his/her own meals?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "387": {
+      "name": "ifyes387",
+      "order": "46",
+      "text": "If \"YES,\" what kind of help does he/she need?",
+      "type": "control_textarea"
+    },
+    "388": {
+      "name": "input388",
+      "order": "47",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">16. MEALS</span></strong></p>",
+      "type": "control_text"
+    },
+    "389": {
+      "name": "cDo389",
+      "order": "58",
+      "text": "c. Does he/she need help or encouragement doing these things?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "390": {
+      "name": "ifyes390",
+      "order": "49",
+      "text": "If \"Yes,\" what kind of food is prepared? (For example, sandwiches, frozen dinners, or complete meals with several courses.)",
+      "type": "control_textarea"
+    },
+    "391": {
+      "name": "howOften",
+      "order": "50",
+      "text": "How often does he/she prepare food or meals? (For example, daily, weekly, monthly.)",
+      "type": "control_textarea"
+    },
+    "392": {
+      "name": "anyChanges",
+      "order": "52",
+      "text": "Any changes in cooking habits since the illness, injuries, or conditions began?",
+      "type": "control_textarea"
+    },
+    "393": {
+      "name": "howLong",
+      "order": "51",
+      "text": "How long does it take him/her?",
+      "type": "control_textbox"
+    },
+    "394": {
+      "name": "bIf",
+      "order": "53",
+      "text": "b. If \"No,\" explain why he/she cannot or does not prepare meals.",
+      "type": "control_textarea",
+      "answer": "Doesn't want to."
+    },
+    "395": {
+      "name": "ltpgtltstronggtltspanStylefontsize",
+      "order": "54",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">17. HOUSE AND YARD WORK </span></strong></p>",
+      "type": "control_text"
+    },
+    "396": {
+      "name": "a",
+      "order": "56",
+      "text": "a . List household chores, both indoors and outdoors, that the disabled person is able to do . (For example, cleaning, laundry, household repairs, ironing, mowing, etc.)",
+      "type": "control_textarea",
+      "answer": "Cleaning"
+    },
+    "397": {
+      "name": "bHow",
+      "order": "57",
+      "text": "b. How much time do chores take, and how often does he/she do each of these things?",
+      "type": "control_textarea",
+      "answer": "Few hours"
+    },
+    "398": {
+      "name": "ifyes398",
+      "order": "59",
+      "text": "If \"YES,\" what help is needed?",
+      "type": "control_textarea"
+    },
+    "399": {
+      "name": "dIf",
+      "order": "62",
+      "text": "d. If the disabled person doesn't do house or yard work, explain why not.",
+      "type": "control_textarea"
+    },
+    "401": {
+      "name": "input401",
+      "order": "61",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_172734_Form203P20(1)20(2).pdf.66dee9e831c3d6.52611950.png\" alt=\"\" /></p>",
+      "type": "control_text"
+    },
+    "402": {
+      "name": "ltpgtltstronggtltspanStylefontsize402",
+      "order": "63",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">18. GETTING AROUND</span></strong></p>",
+      "type": "control_text"
+    },
+    "403": {
+      "name": "aHow",
+      "order": "65",
+      "text": "a. How often does this person go outside?",
+      "type": "control_textbox"
+    },
+    "404": {
+      "name": "doesThis",
+      "order": "64",
+      "text": "Does this person go outside?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "405": {
+      "name": "ifHeshe",
+      "order": "66",
+      "text": "If he/she doesn't go out at all, explain why not.",
+      "type": "control_textarea",
+      "answer": "I don't want to."
+    },
+    "406": {
+      "name": "bWhen",
+      "order": "67",
+      "text": "b. When going out, how does he/she travel? (Check all that apply.)",
+      "type": "control_checkbox"
+    },
+    "407": {
+      "name": "cWhen",
+      "order": "68",
+      "text": "c. When going out, can he/she go out alone?",
+      "type": "control_checkbox"
+    },
+    "408": {
+      "name": "dDoes",
+      "order": "70",
+      "text": "d. Does the disabled person drive?",
+      "type": "control_checkbox"
+    },
+    "409": {
+      "name": "ifno",
+      "order": "69",
+      "text": "If \"NO,\" explain why he/she can't go out alone.",
+      "type": "control_textarea"
+    },
+    "410": {
+      "name": "ifYou410",
+      "order": "71",
+      "text": "If he/she doesn't drive, explain why not.",
+      "type": "control_textarea"
+    },
+    "411": {
+      "name": "ltpgtltstronggtltspanStylefontsize411",
+      "order": "72",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">19. SHOPPING </span></strong></p>",
+      "type": "control_text"
+    },
+    "412": {
+      "name": "aIf",
+      "order": "74",
+      "text": "a. If the disabled person does any shopping, does he/she shop: (Check all that apply.)",
+      "type": "control_checkbox",
+      "answer": ["By phone", "By mail"],
+      "prettyFormat": "By phone; By mail"
+    },
+    "413": {
+      "name": "bDescribe",
+      "order": "75",
+      "text": "b. Describe what he/she shops for.",
+      "type": "control_textarea",
+      "answer": "themselves"
+    },
+    "414": {
+      "name": "cHow",
+      "order": "76",
+      "text": "c. How often does he/she shop and how long does it take?",
+      "type": "control_textarea",
+      "answer": "Not long."
+    },
+    "415": {
+      "name": "ltpgtltstronggtltspanStylefontsize415",
+      "order": "77",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">20. MONEY</span></strong></p>\r\n<p><span style=\"font-size: 12pt;\"><strong>a. Is he/she able to: </strong></span></p>",
+      "type": "control_text"
+    },
+    "416": {
+      "name": "payBills",
+      "order": "78",
+      "text": "Pay bills:",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "417": {
+      "name": "handleA",
+      "order": "79",
+      "text": "Handle a savings account:",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "418": {
+      "name": "countChange",
+      "order": "80",
+      "text": "Count change:",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "419": {
+      "name": "useA",
+      "order": "81",
+      "text": "Use a checkbook/money orders:",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "420": {
+      "name": "useA420",
+      "order": "85",
+      "text": "b. Has the disabled person's ability to handle money changed since the illnesses, injuries, or conditions began?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "421": {
+      "name": "explainAll",
+      "order": "82",
+      "text": "Explain all \"NO\" answers.",
+      "type": "control_textarea"
+    },
+    "422": {
+      "name": "ifyes422",
+      "order": "86",
+      "text": "If \"YES,\" explain how the ability to handle money has changed",
+      "type": "control_textarea"
+    },
+    "423": {
+      "name": "ltpgtltstronggtltspanStylefontsize423",
+      "order": "84",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_172945_Form203P20(1)20(2).pdf.66deea6b7f3ff6.53954230.png\" alt=\"\" /></p>",
+      "type": "control_text"
+    },
+    "425": {
+      "name": "aWhat",
+      "order": "88",
+      "text": "a. What are his/her hobbies and interests? (For example, reading, watching TV, sewing, playing sports, etc.)",
+      "type": "control_textarea",
+      "answer": "Football"
+    },
+    "426": {
+      "name": "bHow426",
+      "order": "89",
+      "text": "b. How often and how well does he/she do these things?",
+      "type": "control_textarea",
+      "answer": "Many times"
+    },
+    "427": {
+      "name": "cDescribe",
+      "order": "90",
+      "text": "c. Describe any changes in these activities since the illnesses, injuries, or conditions began.",
+      "type": "control_textarea",
+      "answer": "no change"
+    },
+    "428": {
+      "name": "ltpgtltstronggtltspanStylefontsize428",
+      "order": "91",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">22. SOCIAL ACTIVITIES </span></strong></p>",
+      "type": "control_text"
+    },
+    "429": {
+      "name": "aHow429",
+      "order": "92",
+      "text": "a. How does the disabled person spend time with others? (Check all that apply.)",
+      "type": "control_checkbox",
+      "answer": ["On the phone", "Texting"],
+      "prettyFormat": "On the phone; Texting"
+    },
+    "430": {
+      "name": "bDescribe430",
+      "order": "93",
+      "text": "b. Describe the kinds of things he/she does with others.",
+      "type": "control_textarea",
+      "answer": "nothing"
+    },
+    "431": {
+      "name": "howOften431",
+      "order": "94",
+      "text": "How often does he/she do these things?",
+      "type": "control_textarea",
+      "answer": "never"
+    },
+    "432": {
+      "name": "cList",
+      "order": "95",
+      "text": "c. List the places he/she goes on a regular basis. (For example, church, community center, sports events, social groups, etc.)",
+      "type": "control_textarea",
+      "answer": "no where."
+    },
+    "433": {
+      "name": "doesHeshe",
+      "order": "96",
+      "text": "Does he/she need to be reminded to go places?",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "434": {
+      "name": "doYou434",
+      "order": "98",
+      "text": "Does he/she need someone to accompany him/her?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "435": {
+      "name": "howOften435",
+      "order": "97",
+      "text": "How often does he/she go and how much does he/she take part?",
+      "type": "control_textarea",
+      "answer": "Never take part."
+    },
+    "436": {
+      "name": "dDo436",
+      "order": "101",
+      "text": "d. Does this person have any problems getting along with family, friends, neighbors, or others?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "438": {
+      "name": "ifyes438",
+      "order": "102",
+      "text": "If \"YES,\" explain.",
+      "type": "control_textarea"
+    },
+    "439": {
+      "name": "eDescribe",
+      "order": "103",
+      "text": "e. Describe any changes in social activities since the illnesses, injuries, or conditions began.",
+      "type": "control_textarea",
+      "answer": "Doesn't meet many people."
+    },
+    "440": {
+      "name": "ltpStyletextalign440",
+      "order": "100",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_173126_Form203P20(1)20(2).pdf.66deeacd84afa9.26556945.png\" alt=\"\" /></p>",
+      "type": "control_text"
+    },
+    "442": {
+      "name": "23A",
+      "order": "105",
+      "text": "23. a. Check any of the following items the disabled person's illnesses, injuries, or conditions affect:",
+      "type": "control_checkbox",
+      "answer": ["Kneeling", "Talking", "Stair Climbing", "Seeing"],
+      "prettyFormat": "Kneeling; Talking; Stair Climbing; Seeing"
+    },
+    "444": {
+      "name": "pleaseExplain",
+      "order": "106",
+      "text": "Please explain how his/her illnesses, injuries, or conditions affect each of the items you checked. (For example, he/she can only lift [how many pounds], or he/she can only walk [how far])",
+      "type": "control_textarea",
+      "answer": "Walk very far."
+    },
+    "445": {
+      "name": "bIs",
+      "order": "107",
+      "text": "b. Is the disabled person:",
+      "type": "control_checkbox",
+      "answer": ["Right Handed?"],
+      "prettyFormat": "Right Handed?"
+    },
+    "447": {
+      "name": "cHow447",
+      "order": "108",
+      "text": "c. How far can he/she walk before needing to stop and rest?",
+      "type": "control_textarea"
+    },
+    "448": {
+      "name": "ifYou448",
+      "order": "109",
+      "text": "If he/she has to rest, how long before he/she can resume walking?",
+      "type": "control_textarea"
+    },
+    "449": {
+      "name": "dFor",
+      "order": "110",
+      "text": "d. For how long can the disabled person pay attention?",
+      "type": "control_textarea",
+      "answer": "No time."
+    },
+    "450": {
+      "name": "eDoes",
+      "order": "111",
+      "text": "e. Does the disabled person finish what he/she starts? ( For example, a conversation, chores, reading, watching a movie.)",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "451": {
+      "name": "fHow",
+      "order": "112",
+      "text": "f. How well does the disabled person follow written instructions? (For example, a recipe.)",
+      "type": "control_textarea",
+      "answer": "Very well."
+    },
+    "452": {
+      "name": "gHow",
+      "order": "113",
+      "text": "g. How well does the disabled person follow spoken instructions?",
+      "type": "control_textarea",
+      "answer": "Very good."
+    },
+    "453": {
+      "name": "hHow",
+      "order": "116",
+      "text": "h. How well does the disabled person get along with authority figures? (For example, police, bosses, landlords or teachers.)",
+      "type": "control_textarea",
+      "answer": "Proud."
+    },
+    "454": {
+      "name": "ifyes454",
+      "order": "118",
+      "text": "If \"YES,\" please explain.",
+      "type": "control_textarea"
+    },
+    "455": {
+      "name": "iHas",
+      "order": "117",
+      "text": "i. Has he/she ever been fired or laid off from a job because of problems getting along with other people?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "456": {
+      "name": "ifyes456",
+      "order": "119",
+      "text": "If \"YES,\" please give name of employer.",
+      "type": "control_textarea"
+    },
+    "457": {
+      "name": "jHow",
+      "order": "120",
+      "text": "j. How well does the disabled person handle stress?",
+      "type": "control_textarea",
+      "answer": "Very great."
+    },
+    "459": {
+      "name": "input459",
+      "order": "115",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_173244_Form203P20(1)20(2).pdf.66deeb208c84c2.45409133.png\" alt=\"\" /></p>",
+      "type": "control_text"
+    },
+    "460": {
+      "name": "kHow",
+      "order": "121",
+      "text": "k. How well does he/she handle changes in routine?",
+      "type": "control_textarea",
+      "answer": "Normal."
+    },
+    "461": {
+      "name": "lHave",
+      "order": "122",
+      "text": "l. Have you noticed any unusual behavior or fears in the disabled person?",
+      "type": "control_checkbox",
+      "answer": ["No"],
+      "prettyFormat": "No"
+    },
+    "462": {
+      "name": "ifyes462",
+      "order": "123",
+      "text": "If \"YES,\" please explain.",
+      "type": "control_textarea"
+    },
+    "463": {
+      "name": "24Does",
+      "order": "124",
+      "text": "24. Does the disabled person use any of the following? (Check all that apply.)",
+      "type": "control_checkbox",
+      "answer": {
+        "0": "Glasses/Contact Lenses",
+        "1": "Artificial Limb",
+        "2": "Artificial Voice Box",
+        "other": "Exo-skeleton"
+      },
+      "prettyFormat": "Glasses/Contact Lenses; Artificial Limb; Artificial Voice Box; Exo-skeleton"
+    },
+    "464": {
+      "name": "whichOf",
+      "order": "125",
+      "text": "Which of these were prescribed by a doctor? If you do not know or do not recall, please write that.",
+      "type": "control_textarea",
+      "answer": "Limb"
+    },
+    "465": {
+      "name": "whenWas",
+      "order": "126",
+      "text": "When was it prescribed? If you do not know or do not recall, please write that.",
+      "type": "control_textarea",
+      "answer": "Very long ago."
+    },
+    "466": {
+      "name": "whenDoes",
+      "order": "127",
+      "text": "When does this person need to use these aids?",
+      "type": "control_textarea"
+    },
+    "467": {
+      "name": "25Does",
+      "order": "130",
+      "text": "25. Does the disabled person currently take any medicines for his/her illnesses, injuries, or conditions?",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "469": {
+      "name": "input469",
+      "order": "129",
+      "text": "<p><img src=\"https://www.jotform.com/uploads/linerlegal/form_files/Opera%20Snapshot_2024-09-09_173330_Form203P20(1)20(2).pdf.66deeb498c8334.59374587.png\" alt=\"\" /></p>",
+      "type": "control_text"
+    },
+    "470": {
+      "name": "if",
+      "order": "131",
+      "text": "If \" YES,\" do any of the medicines cause side effects?",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "471": {
+      "name": "input471",
+      "order": "132",
+      "text": "<p><span style=\"font-size: 12pt;\">If \"YES,\" please explain. (Do not list all of the medicines that the disabled person takes. List only the medicines that cause side effects for the disabled person.) </span></p>",
+      "type": "control_text"
+    },
+    "472": {
+      "name": "1Name472",
+      "order": "133",
+      "text": "1. NAME OF MEDICINE ",
+      "type": "control_textarea",
+      "answer": "Some medecine"
+    },
+    "473": {
+      "name": "1Side",
+      "order": "134",
+      "text": "1. SIDE EFFECTS PERSON HAS",
+      "type": "control_textarea",
+      "answer": "I don't know effect"
+    },
+    "474": {
+      "name": "2Name",
+      "order": "135",
+      "text": "2. NAME OF MEDICINE ",
+      "type": "control_textarea"
+    },
+    "475": {
+      "name": "2Side",
+      "order": "136",
+      "text": "2. SIDE EFFECTS PERSON HAS",
+      "type": "control_textarea"
+    },
+    "476": {
+      "name": "3Name",
+      "order": "137",
+      "text": "3. NAME OF MEDICINE ",
+      "type": "control_textarea"
+    },
+    "477": {
+      "name": "3Side",
+      "order": "138",
+      "text": "3. SIDE EFFECTS PERSON HAS",
+      "type": "control_textarea"
+    },
+    "478": {
+      "name": "4Name",
+      "order": "139",
+      "text": "4. NAME OF MEDICINE ",
+      "type": "control_textarea"
+    },
+    "479": {
+      "name": "4Side",
+      "order": "140",
+      "text": "4. SIDE EFFECTS PERSON HAS",
+      "type": "control_textarea"
+    },
+    "482": {
+      "name": "ltpStyletextalign482",
+      "order": "141",
+      "text": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt;\">SECTION E - REMARKS</span></strong></p>\r\n<p style=\"text-align: left;\"><span style=\"font-size: 12pt;\">Use this section for any added information you did not show in earlier parts of this form. When you are done with this section (or if you didn't have anything to add), be sure to complete the fields at the bottom of this page.</span></p>",
+      "type": "control_text"
+    },
+    "483": {
+      "name": "date",
+      "order": "144",
+      "sublabels": "{\"day\":\"Day\",\"month\":\"Month\",\"year\":\"Year\",\"last\":\"Last Name\",\"hour\":\"Hour\",\"minutes\":\"Minutes\",\"litemode\":\"\"}",
+      "text": "Date:",
+      "timeFormat": "AM/PM",
+      "type": "control_datetime",
+      "answer": {
+        "month": "08",
+        "day": "09",
+        "year": "2025",
+        "datetime": "2025-08-09 00:00:00"
+      },
+      "prettyFormat": "08/09/2025"
+    },
+    "484": {
+      "name": "emailAddress",
+      "order": "145",
+      "text": "Email address:",
+      "type": "control_email"
+    },
+    "485": {
+      "name": "doThe",
+      "order": "55",
+      "text": "Do the disabled person do household and yard work?",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "486": {
+      "name": "doesThe",
+      "order": "73",
+      "text": "Does the disabled person do shopping?",
+      "type": "control_checkbox",
+      "answer": ["Yes"],
+      "prettyFormat": "Yes"
+    },
+    "487": {
+      "name": "2Your",
+      "order": "7",
+      "text": "2. YOUR NAME",
+      "type": "control_textbox",
+      "answer": "Xaitmi"
+    },
+    "488": {
+      "name": "3Relationship",
+      "order": "8",
+      "text": "3. RELATIONSHIP (To disabled person)",
+      "type": "control_textbox",
+      "answer": "Caretaker"
+    },
+    "489": {
+      "name": "4Date",
+      "order": "9",
+      "sublabels": "{\"day\":\"Day\",\"month\":\"Month\",\"year\":\"Year\",\"last\":\"Last Name\",\"hour\":\"Hour\",\"minutes\":\"Minutes\",\"litemode\":\"\"}",
+      "text": "4. DATE",
+      "timeFormat": "AM/PM",
+      "type": "control_datetime",
+      "answer": {
+        "month": "08",
+        "day": "09",
+        "year": "2025",
+        "datetime": "2025-08-09 00:00:00"
+      },
+      "prettyFormat": "08/09/2025"
+    },
+    "490": {
+      "name": "input490",
+      "order": "13",
+      "text": "<p><span style=\"font-size: 12pt;\"><em><strong>If you do not know the answer or the answer is “none” or “does not apply,” please write “don't know” or “none” or “does not apply.”</strong></em></span></p>",
+      "type": "control_text"
+    },
+    "491": {
+      "name": "6A",
+      "order": "14",
+      "text": "6. a. How long have you known the disabled person?",
+      "type": "control_textarea",
+      "answer": "Very long"
+    },
+    "492": {
+      "name": "bHow492",
+      "order": "15",
+      "text": "b. How much time do you spend with the disabled person and what do you do together?",
+      "type": "control_textarea",
+      "answer": "Sometime"
+    },
+    "494": {
+      "name": "ltpgtltstronggtltspanStylefontsize494",
+      "order": "87",
+      "text": "<p><strong><span style=\"font-size: 14pt;\">21. HOBBIES AND INTERESTS</span></strong></p>",
+      "type": "control_text"
+    },
+    "495": {
+      "name": "ltpStyletextalign",
+      "order": "104",
+      "text": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt;\">SECTION D - INFORMATION ABOUT ABILITIES</span></strong></p>",
+      "type": "control_text"
+    },
+    "507": {
+      "name": "pageBreak",
+      "order": "20",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "508": {
+      "name": "pageBreak508",
+      "order": "41",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "509": {
+      "name": "pageBreak509",
+      "order": "60",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "510": {
+      "name": "pageBreak510",
+      "order": "83",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "511": {
+      "name": "pageBreak511",
+      "order": "99",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "512": {
+      "name": "pageBreak512",
+      "order": "114",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    },
+    "513": {
+      "name": "pageBreak513",
+      "order": "128",
+      "text": "Page Break",
+      "type": "control_pagebreak"
+    }
+  }
+}
