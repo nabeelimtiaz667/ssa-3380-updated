@@ -1,47 +1,205 @@
-import { useRef, useState } from "react";
-import { CheckboxGroup, Textbox } from "../shared/Inputs";
+import { useEffect, useRef, useState } from "react";
+import { CheckboxGroup, Textbox, YesNoCheckbox } from "../shared/Inputs";
 import FormLabel from "../shared/Label";
 import FlattenData from "../utils/FlattenData";
+import axios from "axios";
+import DatePicker from "../shared/DatePicker";
 
 export default function WorkingForm() {
   const [disableName, setDisableName] = useState("");
   const [yourName, setYourName] = useState("");
   const [relationship, setRelationship] = useState("");
+  const [date, setDate] = useState({});
   const [areacode, setAreacode] = useState("");
   const [phone, setPhone] = useState("");
-  const numberType = useRef(null); // Your Number | Message Number | None
+  const [numberType, setNumberType] = useState(null); // Your Number | Message Number | None
   const [knowDisable, setKnowDisable] = useState("");
   const [timeWithDisable, setTimeWithDisable] = useState("");
-  const whereDisableLive = useRef(null);
-  const withWhomDisableLive = useRef(null);
+  const [whereDisableLive, setWhereDisableLive] = useState(null);
+  const [withWhomDisableLive, setWithWhomDisableLive] = useState(null);
   const [limitAbility, setLimitAbility] = useState("");
+  const [whatDisableDo, setWhatDisableDo] = useState("");
+  const [doesTakeCare, setDoesTakeCare] = useState([]);
+  const [takeCareYes, setTakeCareYes] = useState("");
+  const [takePetCare, setTakePetCare] = useState([]);
+  const [petCareYes, setPetCareYes] = useState("");
+  const [helpTakeCare, setHelpTakeCare] = useState([]);
+  const [helpTakeCareYes, setHelpTakeCareYes] = useState("");
+  const [whatDoBefore, setWhatDoBefore] = useState("");
+  const [effectSleep, setEffectSleep] = useState([]);
+  const [effectSleepYes, setEffectSleepYes] = useState("");
+  const [takePersonalCare, setTakePersonalCare] = useState([]);
+  const [takePersonalCareYesDress, setTakePersonalCareYesDress] = useState("");
+  const [takePersonalCareYesBathe, setTakePersonalCareYesBathe] = useState("");
+  const [takePersonalCareYesHair, setTakePersonalCareYesHair] = useState("");
+  const [takePersonalCareYesShave, setTakePersonalCareYesShave] = useState("");
+  const [takePersonalCareYesFeed, setTakePersonalCareYesFeed] = useState("");
+  const [takePersonalCareYesToilet, setTakePersonalCareYesToilet] =
+    useState("");
+  const [takePersonalCareYesOther, setTakePersonalCareYesOther] = useState("");
+  const [specialReminders, setSpecialReminders] = useState([]);
+  const [specialRemindersYes, setSpecialRemindersYes] = useState("");
+  const [medicineReminders, setMedicineReminders] = useState([]);
+  const [medicineRemindersYes, setMedicineRemindersYes] = useState("");
+  const [prepareMeals, setPrepareMeals] = useState([]);
+  const [prepareMealsYesFoodKind, setPrepareMealsYesFoodKind] = useState("");
+  const [prepareMealsYesFoodOften, setPrepareMealsYesFoodOften] = useState("");
+  const [prepareMealsYesHowLong, setPrepareMealsYesHowLong] = useState("");
+  const [prepareMealsYesHabitChange, setPrepareMealsYesHabitChange] =
+    useState("");
+  const [prepareMealsNo, setPrepareMealsNo] = useState("");
+  const [doHousehold, setDoHousehold] = useState([]);
+  const [doHouseholdYesListChores, setDoHouseholdYesListChores] = useState("");
+  const [doHouseholdYesChoreTime, setDoHouseholdYesChoreTime] = useState("");
+  const [doHouseholdYesEncourage, setDoHouseholdYesEncourage] = useState([]);
+  const [doHouseholdYesEncourageYes, setDoHouseholdYesEncourageYes] =
+    useState("");
+
   const jotformObject = {
     q190_1Name: disableName,
     q487_2Your: yourName,
     q488_3Relationship: relationship,
+    q489_4Date: date,
     q327_primary327: {
       area: areacode,
       phone: phone,
     },
-    q354_typeA354: numberType.current,
+    q354_typeA354: numberType,
     q491_6A: knowDisable,
     q492_bHow492: timeWithDisable,
-    q355_4aWheredoyouliveCheckone: whereDisableLive.current,
-    q356_bWith: withWhomDisableLive.current,
+    q355_4aWheredoyouliveCheckone: whereDisableLive,
+    q356_bWith: withWhomDisableLive,
     q358_8How: limitAbility,
+    q360_9Describe: whatDisableDo,
+    q361_10Does: doesTakeCare,
+    q363_ifyes: takeCareYes,
+    q362_11Does: takePetCare,
+    q365_ifyes365: petCareYes,
+    q364_12Does: helpTakeCare,
+    q367_ifyes367: helpTakeCareYes,
+    q368_13What: whatDoBefore,
+    q366_14Do: effectSleep,
+    q370_ifyes370: effectSleepYes,
+    q369_15Personal: takePersonalCare,
+    q373_dress: takePersonalCareYesDress,
+    q374_bathe: takePersonalCareYesBathe,
+    q375_careFor: takePersonalCareYesHair,
+    q376_shave: takePersonalCareYesShave,
+    q377_feedSelf: takePersonalCareYesFeed,
+    q378_useThe: takePersonalCareYesToilet,
+    q379_other: takePersonalCareYesOther,
+    q372_12Do372: specialReminders,
+    q385_ifyes385: specialRemindersYes,
+    q384_cDoes: medicineReminders,
+    q387_ifyes387: medicineRemindersYes,
+    q386_aDoes: prepareMeals,
+    q394_bIf: prepareMealsNo,
+    q390_ifyes390: prepareMealsYesFoodKind,
+    q391_howOften: prepareMealsYesFoodOften,
+    q393_howLong: prepareMealsYesHowLong,
+    q392_anyChanges: prepareMealsYesHabitChange,
+    q485_doThe: doHousehold,
+    q396_a: doHouseholdYesListChores,
+    q397_bHow: doHouseholdYesChoreTime,
+    q389_cDo389: doHouseholdYesEncourage,
+    q398_ifyes398: doHouseholdYesEncourageYes,
   };
+
+  // If checkbox yes with textbox has no, then remove the answers of yes textbox
+  useEffect(() => {
+    if (doesTakeCare.includes("No")) {
+      setTakeCareYes("");
+    }
+    if (takePetCare.includes("No")) {
+      setPetCareYes("");
+    }
+    if (helpTakeCare.includes("No")) {
+      setHelpTakeCareYes("");
+    }
+    if (effectSleep.includes("No")) {
+      setEffectSleepYes("");
+    }
+    // Remove all textbox answers of personal care if no
+    if (takePersonalCare.includes("No")) {
+      setTakePersonalCareYesDress("");
+      setTakePersonalCareYesBathe("");
+      setTakePersonalCareYesHair("");
+      setTakePersonalCareYesShave("");
+      setTakePersonalCareYesFeed("");
+      setTakePersonalCareYesToilet("");
+      setTakePersonalCareYesOther("");
+    }
+    if (specialReminders.includes("No")) {
+      setSpecialRemindersYes("");
+    }
+    if (medicineReminders.includes("No")) {
+      setMedicineRemindersYes("");
+    }
+    if (prepareMeals.includes("No")) {
+      setPrepareMealsYesFoodKind("");
+      setPrepareMealsYesFoodOften("");
+      setPrepareMealsYesHowLong("");
+      setPrepareMealsYesHabitChange("");
+    }
+    if (doHousehold.includes("No")) {
+      setDoHouseholdYesListChores("");
+      setDoHouseholdYesChoreTime("");
+      setDoHouseholdYesEncourage([]);
+      setDoHouseholdYesEncourageYes("");
+    }
+    if (doHouseholdYesEncourage.includes("No")) {
+      setDoHouseholdYesEncourageYes("");
+    }
+  }, [
+    doesTakeCare,
+    takePetCare,
+    helpTakeCare,
+    effectSleep,
+    takePersonalCare,
+    specialReminders,
+    medicineReminders,
+    prepareMeals,
+    doHousehold,
+    doHouseholdYesEncourage,
+  ]);
+
+  // If checkbox no with textbox has yes, then remove the answers of no textbox
+  useEffect(() => {
+    if (prepareMeals.includes("Yes")) {
+      setPrepareMealsNo("");
+    }
+  }, [prepareMeals]);
+
   const convertObject = () => {
     const data = FlattenData(jotformObject);
     sessionStorage.setItem("JotFormData", JSON.stringify(data));
     console.log("Following data has been stored in session storage:", data);
   };
-  const sendData = () => {
+  const sendData = async () => {
     const data = JSON.parse(sessionStorage.getItem("JotFormData"));
     const formValues = new FormData();
     for (const key in data) {
       formValues.append(key, data[key]);
     }
-    console.log(formValues);
+    try {
+      const response = await axios.post(
+        "https://submit.jotform.com/submit/242508927461461/",
+        formValues,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.status >= 200 && response.status < 300) {
+        console.log("Data sent successfully:", response.data);
+      } else {
+        console.error("Failed to send data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error sending data to JotForm:", error);
+    }
   };
   return (
     <div className="working-form flex flex-col gap-5" id="form-1">
@@ -69,9 +227,17 @@ export default function WorkingForm() {
         labelText="3. RELATIONSHIP (To disabled person)"
         required
       />
+      <DatePicker
+        id="form_filling_date"
+        dateRange="future"
+        dateState={date}
+        setDateState={setDate}
+        labelText="4. Date of Form Filling"
+        required
+      />
       <div className="flex flex-col gap-2">
         <FormLabel id="primary_number">
-          Your Primary <span className="text-red-500">*</span>
+          5. Your Primary <span className="text-red-500">*</span>
         </FormLabel>
         <div className="flex flex-row gap-2">
           <Textbox
@@ -97,7 +263,7 @@ export default function WorkingForm() {
         <CheckboxGroup
           options={["Your Number", "Message Number", "None"]}
           name="primary_num_type"
-          checkboxObject={numberType}
+          checkboxObject={setNumberType}
           singleSelect
           required
         />
@@ -109,6 +275,7 @@ export default function WorkingForm() {
         setState={setKnowDisable}
         labelText="6. a. How long have you known the disabled person?"
         textarea
+        limit={45}
         required
       />
       <Textbox
@@ -118,10 +285,11 @@ export default function WorkingForm() {
         setState={setTimeWithDisable}
         labelText="b. How much time do you spend with the disabled person and what do you do together?"
         textarea
+        limit={100}
       />
       <CheckboxGroup
         options={[
-          "Housing",
+          "House",
           "Apartment",
           "Boarding House",
           "Nursing Home",
@@ -129,16 +297,16 @@ export default function WorkingForm() {
           "Group Home",
         ]}
         name="whereDisableLive"
-        checkboxObject={whereDisableLive}
+        checkboxObject={setWhereDisableLive}
         labelText="7. a. Where does the disabled person live? (Check one.)"
         singleSelect
         other
         required
       />
       <CheckboxGroup
-        options={["Alone", "With Family", "With Friends", "Nursing Home"]}
+        options={["Alone", "With Family", "With Friends"]}
         name="withWhomDisableLive"
-        checkboxObject={withWhomDisableLive}
+        checkboxObject={setWithWhomDisableLive}
         labelText="b. With whom does he/she live? (Check one.)"
         singleSelect
         other
@@ -150,10 +318,318 @@ export default function WorkingForm() {
         state={limitAbility}
         setState={setLimitAbility}
         labelText="8. How does this person's illnesses, injuries, or conditions limit his/her ability to work?"
-        rows={3}
+        rows={4}
         textarea
+        limit={400}
         required
       />
+      <Textbox
+        id="limitAbility"
+        name="limitAbility"
+        state={whatDisableDo}
+        setState={setWhatDisableDo}
+        labelText="9. Describe what the disabled person does from the time he/she wakes up until going to bed."
+        rows={4}
+        textarea
+        limit={400}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setDoesTakeCare}
+        labelText="10. Does this person take care of anyone else such as a wife/husband, children, grandchildren, parents, friend, other?"
+        textBoxOnYes={
+          <Textbox
+            state={takeCareYes}
+            setState={setTakeCareYes}
+            id="q363_ifyes"
+            name="q363_ifyes"
+            labelText='If "YES," for whom does he/she care, and what does he/she do for them?'
+            textarea
+            limit={300}
+            rows={3}
+            required
+          />
+        }
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setTakePetCare}
+        labelText="11. Does he/she take care of pets or other animals?"
+        textBoxOnYes={
+          <Textbox
+            state={petCareYes}
+            setState={setPetCareYes}
+            id="what_does_he_do"
+            name="what_does_he_do"
+            labelText='If "YES," what does he/she do for them?'
+            textarea
+            limit={200}
+            rows={2}
+            required
+          />
+        }
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setHelpTakeCare}
+        labelText="12. Does anyone help this person care for other people or animals?"
+        textBoxOnYes={
+          <Textbox
+            state={helpTakeCareYes}
+            setState={setHelpTakeCareYes}
+            id="help_take_care"
+            name="help_take_care"
+            labelText='If "YES," who helps, and what do they do to help?'
+            textarea
+            limit={300}
+            rows={3}
+            required
+          />
+        }
+        required
+      />
+      <Textbox
+        id="whatDoBefore"
+        name="whatDoBefore"
+        state={whatDoBefore}
+        setState={setWhatDoBefore}
+        labelText="13. What was the disabled person able to do before his/her illnesses, injuries, or conditions that he/she can't do now?"
+        rows={3}
+        textarea
+        limit={300}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setEffectSleep}
+        labelText="14. Do the illnesses, injuries, or conditions affect his/her sleep?"
+        textBoxOnYes={
+          <Textbox
+            state={effectSleepYes}
+            setState={setEffectSleepYes}
+            id="do_effect_sleep"
+            name="do_effect_sleep"
+            labelText='If "YES," how?'
+            textarea
+            limit={300}
+            rows={3}
+            required
+          />
+        }
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setTakePersonalCare}
+        labelText="14. a. Do the illnesses, injuries, or conditions affect his/her sleep?"
+        textBoxOnYes={
+          <>
+            <FormLabel id="take_personal_care">
+              a. Explain how the illnesses, injuries, or conditions affect this
+              person's ability to:
+            </FormLabel>
+            {[
+              {
+                state: takePersonalCareYesDress,
+                setState: setTakePersonalCareYesDress,
+                label: "Dress:",
+              },
+              {
+                state: takePersonalCareYesBathe,
+                setState: setTakePersonalCareYesBathe,
+                label: "Bathe:",
+              },
+              {
+                state: takePersonalCareYesHair,
+                setState: setTakePersonalCareYesHair,
+                label: "Care for Hair:",
+              },
+              {
+                state: takePersonalCareYesShave,
+                setState: setTakePersonalCareYesShave,
+                label: "Shave:",
+              },
+              {
+                state: takePersonalCareYesFeed,
+                setState: setTakePersonalCareYesFeed,
+                label: "Feed Self:",
+              },
+              {
+                state: takePersonalCareYesToilet,
+                setState: setTakePersonalCareYesToilet,
+                label: "Use the Toilet:",
+              },
+              {
+                state: takePersonalCareYesOther,
+                setState: setTakePersonalCareYesOther,
+                label: "Other:",
+              },
+            ].map((item, index) => {
+              return (
+                <Textbox
+                  key={"q369_options_on_yes_" + index}
+                  state={item.state}
+                  setState={item.setState}
+                  id={`q369_${item.label}_${index}`}
+                  name={`q369_${item.label}_${index}`}
+                  labelText={item.label}
+                  textarea
+                  limit={80}
+                />
+              );
+            })}
+          </>
+        }
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setSpecialReminders}
+        labelText="b. Does he/she need any special reminders to take care of personal needs and grooming?"
+        textBoxOnYes={
+          <Textbox
+            state={specialRemindersYes}
+            setState={setSpecialRemindersYes}
+            id="special_reminder_need"
+            name="special_reminder_need"
+            labelText='If "YES," what type of help or reminders are needed?'
+            textarea
+            limit={276}
+            rows={3}
+            required
+          />
+        }
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setMedicineReminders}
+        labelText="c. Does he/she need help or reminders taking medicine?"
+        textBoxOnYes={
+          <Textbox
+            state={medicineRemindersYes}
+            setState={setMedicineRemindersYes}
+            id="medicne_reminder_need"
+            name="medicne_reminder_need"
+            labelText='If "YES," what kind of help does he/she need?'
+            textarea
+            limit={276}
+            rows={3}
+            required
+          />
+        }
+        required
+      />
+
+      <FormLabel id="meals">16. MEALS</FormLabel>
+
+      <YesNoCheckbox
+        checkboxObject={setPrepareMeals}
+        labelText="a. Does the disabled person prepare his/her own meals?"
+        textBoxOnYes={[
+          {
+            state: prepareMealsYesFoodKind,
+            setState: setPrepareMealsYesFoodKind,
+            label:
+              'If "Yes," what kind of food is prepared? (For example, sandwiches, frozen dinners, or complete meals with several courses.)',
+          },
+          {
+            state: prepareMealsYesFoodOften,
+            setState: setPrepareMealsYesFoodOften,
+            label:
+              "How often does he/she prepare food or meals? (For example, daily, weekly, monthly.)",
+          },
+          {
+            state: prepareMealsYesHowLong,
+            setState: setPrepareMealsYesHowLong,
+            label: "How long does it take him/her?",
+          },
+          {
+            state: prepareMealsYesHabitChange,
+            setState: setPrepareMealsYesHabitChange,
+            label:
+              "Any changes in cooking habits since the illness, injuries, or conditions began?",
+          },
+        ].map((item, index) => {
+          return (
+            <Textbox
+              key={"q386_options_on_yes_" + index}
+              state={item.state}
+              setState={item.setState}
+              id={`q386_${item.label}_${index}`}
+              name={`q386_${item.label}_${index}`}
+              labelText={item.label}
+              textarea
+              limit={92}
+              required
+            />
+          );
+        })}
+        textBoxOnNo={
+          <Textbox
+            state={prepareMealsNo}
+            setState={setPrepareMealsNo}
+            id="doesnt_prepare_meals"
+            name="doesnt_prepare_meals"
+            labelText='b. If "No," explain why he/she cannot or does not prepare meals.'
+            textarea
+            limit={200}
+            rows={2}
+            required
+          />
+        }
+        required
+      />
+
+      <FormLabel id="house_and_work">17. HOUSE AND YARD WORK</FormLabel>
+
+      <YesNoCheckbox
+        checkboxObject={setDoHousehold}
+        labelText="Do the disabled person do household and yard work?"
+        name="q485_doThe"
+        textBoxOnYes={
+          <>
+            <Textbox
+              state={doHouseholdYesListChores}
+              setState={setDoHouseholdYesListChores}
+              id="do_household_yes_list_chores"
+              name="do_household_yes_list_chores"
+              labelText="a . List household chores, both indoors and outdoors, that the disabled person is able to do . (For example, cleaning, laundry, household repairs, ironing, mowing, etc.)"
+              textarea
+              limit={200}
+              rows={2}
+              required
+            />
+            <Textbox
+              state={doHouseholdYesChoreTime}
+              setState={setDoHouseholdYesChoreTime}
+              id="do_household_yes_chore_time"
+              name="do_household_yes_chore_time"
+              labelText="b. How much time do chores take, and how often does he/she do each of these things?"
+              textarea
+              limit={200}
+              rows={2}
+              required
+            />
+            <YesNoCheckbox
+              checkboxObject={setDoHouseholdYesEncourage}
+              labelText="c. Does he/she need help or encouragement doing these things?"
+              name="need_encouragement"
+              textBoxOnYes={
+                <Textbox
+                  state={doHouseholdYesEncourageYes}
+                  setState={setDoHouseholdYesEncourageYes}
+                  id="do_household_yes_encourage_yes"
+                  name="do_household_yes_encourage_yes"
+                  labelText='If "YES," what help is needed?'
+                  textarea
+                  limit={100}
+                  required
+                />
+              }
+              required
+            />
+          </>
+        }
+        required
+      />
+
       <div className="flex flex-row justify-evenly">
         <button
           className="jotform-submit"

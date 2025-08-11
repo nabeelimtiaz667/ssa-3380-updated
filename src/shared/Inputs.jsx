@@ -35,6 +35,7 @@ const Textbox = ({
   containerClass = "",
   textarea = false,
   rows = 1,
+  limit = undefined,
   required = false,
   hint = "",
 }) => {
@@ -50,16 +51,23 @@ const Textbox = ({
         </FormLabel>
       )}
       {textarea ? (
-        <textarea
-          className={className}
-          name={name}
-          id={id}
-          placeholder={placeholder}
-          onChange={onChange}
-          aria-labelledby={labelCondition ? `label_${id}` : ""}
-          rows={rows}
-          value={state}
-        ></textarea>
+        <>
+          <textarea
+            className={className}
+            name={name}
+            id={id}
+            placeholder={placeholder}
+            onChange={onChange}
+            aria-labelledby={labelCondition ? `label_${id}` : ""}
+            rows={rows}
+            value={state}
+          ></textarea>
+          {limit && (
+            <span className="text-sm text-gray-800">
+              {state.length}/{limit}
+            </span>
+          )}
+        </>
       ) : (
         <input
           type="text"
@@ -74,6 +82,12 @@ const Textbox = ({
       )}
       {hint.length > 0 && <span className="text-xs text-gray-800">{hint}</span>}
       {required && <ErrorText condition={() => state.length > 0} />}
+      {limit && (
+        <ErrorText
+          condition={() => state.length <= limit}
+          text={`Max ${limit} characters`}
+        />
+      )}
     </div>
   );
 };
@@ -95,12 +109,12 @@ const CheckboxGroup = ({
     if (!selected) return;
     if (selected.includes("other")) {
       if (selected.length > 1) {
-        checkboxObject.current = { ...selected, other: otherText };
+        checkboxObject({ ...selected, other: otherText });
       } else {
-        checkboxObject.current = { other: otherText };
+        checkboxObject({ other: otherText });
       }
     } else {
-      checkboxObject.current = [...selected];
+      checkboxObject([...selected]);
     }
     // console.log("Current other object: ", checkboxObject?.current);
   }, [selected, otherText]);
@@ -154,4 +168,51 @@ const CheckboxGroup = ({
   );
 };
 
-export { Textbox, CheckboxGroup };
+const YesNoCheckbox = ({
+  checkboxObject,
+  labelText = "",
+  name = "",
+  required = false,
+  textBoxOnYes,
+  textBoxOnNo,
+}) => {
+  const [selected, setSelected] = useState([]);
+  const [otherText, setOtherText] = useState("");
+  var checkOptions = ["Yes", "No"];
+
+  useEffect(() => {
+    if (!selected) return;
+    checkboxObject([...selected]);
+  }, [selected, otherText]);
+
+  const handleChange = (value) => {
+    setSelected(selected[0] === value ? [] : [value]);
+  };
+
+  return (
+    <div className="form-group">
+      <FormLabel id={`label_for_${name}`}>
+        {labelText} {required && <Required />}
+      </FormLabel>
+      <div className="checkbox-group grid grid-cols-3 gap-4">
+        {checkOptions.map((option) => (
+          <label key={option} style={{ display: "block" }}>
+            <input
+              type="checkbox"
+              className="mr-1"
+              checked={selected[0] === option}
+              onChange={() => handleChange(option)}
+              value={option}
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+      {required && <ErrorText condition={() => selected.length > 0} />}
+      {selected[0] === "Yes" && textBoxOnYes && <>{textBoxOnYes}</>}
+      {selected[0] === "No" && textBoxOnNo && <>{textBoxOnNo}</>}
+    </div>
+  );
+};
+
+export { Textbox, CheckboxGroup, YesNoCheckbox };
