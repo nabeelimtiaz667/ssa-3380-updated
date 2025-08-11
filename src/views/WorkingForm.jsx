@@ -54,6 +54,14 @@ export default function WorkingForm() {
   const [doHouseholdYesEncourage, setDoHouseholdYesEncourage] = useState([]);
   const [doHouseholdYesEncourageYes, setDoHouseholdYesEncourageYes] =
     useState("");
+  const [doesGoOutside, setDoesGoOutside] = useState([]);
+  const [doesGoOutsideNo, setDoesGoOutsideNo] = useState("");
+  const [howOftenOutside, setHowOftenOutside] = useState("");
+  const [howdoesTravel, setHowdoesTravel] = useState(null);
+  const [goOutAlone, setGoOutAlone] = useState([]);
+  const [goOutAloneNo, setGoOutAloneNo] = useState("");
+  const [disableDriving, setDisableDriving] = useState([]);
+  const [disableDrivingNo, setDisableDrivingNo] = useState("");
 
   const jotformObject = {
     q190_1Name: disableName,
@@ -103,6 +111,14 @@ export default function WorkingForm() {
     q397_bHow: doHouseholdYesChoreTime,
     q389_cDo389: doHouseholdYesEncourage,
     q398_ifyes398: doHouseholdYesEncourageYes,
+    q404_doesThis: doesGoOutside,
+    q405_ifHeshe: doesGoOutsideNo,
+    q403_aHow: howOftenOutside,
+    q406_bWhen: howdoesTravel,
+    q407_cWhen: goOutAlone,
+    q409_ifno: goOutAloneNo,
+    q408_dDoes: disableDriving,
+    q410_ifYou410: disableDrivingNo,
   };
 
   // If checkbox yes with textbox has no, then remove the answers of yes textbox
@@ -110,15 +126,23 @@ export default function WorkingForm() {
     if (doesTakeCare.includes("No")) {
       setTakeCareYes("");
     }
+  }, [doesTakeCare]);
+  useEffect(() => {
     if (takePetCare.includes("No")) {
       setPetCareYes("");
     }
+  }, [takePetCare]);
+  useEffect(() => {
     if (helpTakeCare.includes("No")) {
       setHelpTakeCareYes("");
     }
+  }, [helpTakeCare]);
+  useEffect(() => {
     if (effectSleep.includes("No")) {
       setEffectSleepYes("");
     }
+  }, [effectSleep]);
+  useEffect(() => {
     // Remove all textbox answers of personal care if no
     if (takePersonalCare.includes("No")) {
       setTakePersonalCareYesDress("");
@@ -129,39 +153,48 @@ export default function WorkingForm() {
       setTakePersonalCareYesToilet("");
       setTakePersonalCareYesOther("");
     }
+  }, [takePersonalCare]);
+  useEffect(() => {
     if (specialReminders.includes("No")) {
       setSpecialRemindersYes("");
     }
+  }, [specialReminders]);
+  useEffect(() => {
     if (medicineReminders.includes("No")) {
       setMedicineRemindersYes("");
     }
+  }, [medicineReminders]);
+  useEffect(() => {
     if (prepareMeals.includes("No")) {
       setPrepareMealsYesFoodKind("");
       setPrepareMealsYesFoodOften("");
       setPrepareMealsYesHowLong("");
       setPrepareMealsYesHabitChange("");
     }
+  }, [prepareMeals]);
+  useEffect(() => {
     if (doHousehold.includes("No")) {
       setDoHouseholdYesListChores("");
       setDoHouseholdYesChoreTime("");
       setDoHouseholdYesEncourage([]);
       setDoHouseholdYesEncourageYes("");
     }
+  }, [doHousehold]);
+  useEffect(() => {
     if (doHouseholdYesEncourage.includes("No")) {
       setDoHouseholdYesEncourageYes("");
     }
-  }, [
-    doesTakeCare,
-    takePetCare,
-    helpTakeCare,
-    effectSleep,
-    takePersonalCare,
-    specialReminders,
-    medicineReminders,
-    prepareMeals,
-    doHousehold,
-    doHouseholdYesEncourage,
-  ]);
+  }, [doHouseholdYesEncourage]);
+  useEffect(() => {
+    if (doesGoOutside.includes("No")) {
+      setHowOftenOutside("");
+      setHowdoesTravel(null);
+      setGoOutAlone([]);
+      setGoOutAloneNo("");
+      setDisableDriving([]);
+      setDisableDrivingNo("");
+    }
+  }, [doesGoOutside]);
 
   // If checkbox no with textbox has yes, then remove the answers of no textbox
   useEffect(() => {
@@ -169,6 +202,22 @@ export default function WorkingForm() {
       setPrepareMealsNo("");
     }
   }, [prepareMeals]);
+
+  useEffect(() => {
+    if (doesGoOutside.includes("Yes")) {
+      setDoesGoOutsideNo("");
+    }
+  }, [doesGoOutside]);
+  useEffect(() => {
+    if (goOutAlone.includes("Yes")) {
+      setGoOutAloneNo("");
+    }
+  }, [goOutAlone]);
+  useEffect(() => {
+    if (disableDriving.includes("Yes")) {
+      setDisableDrivingNo("");
+    }
+  }, [disableDriving]);
 
   const convertObject = () => {
     const data = FlattenData(jotformObject);
@@ -629,6 +678,92 @@ export default function WorkingForm() {
         }
         required
       />
+
+      <FormLabel id="house_and_work">18. GETTING AROUND</FormLabel>
+
+      <YesNoCheckbox
+        checkboxObject={setDoesGoOutside}
+        labelText="Does this person go outside?"
+        name="does_go_outside"
+        textBoxOnNo={
+          <Textbox
+            state={doesGoOutsideNo}
+            setState={setDoesGoOutsideNo}
+            id="not_go_outside"
+            name="not_go_outside"
+            labelText="If he/she doesn't go out at all, explain why not."
+            textarea
+            limit={198}
+            rows={2}
+            required
+          />
+        }
+        required
+      />
+
+      {doesGoOutside.includes("Yes") && (
+        <>
+          <Textbox
+            id="how_often_outside"
+            name="how_often_outside"
+            state={howOftenOutside}
+            setState={setHowOftenOutside}
+            labelText="a. How often does this person go outside?"
+            required
+          />
+          <CheckboxGroup
+            options={[
+              "Walk",
+              "Drive a car",
+              "Ride in a car",
+              "Ride a bicycle",
+              "Use public transportation",
+            ]}
+            labelText="b. When going out, how does he/she travel? (Check all that apply.)"
+            checkboxObject={setHowdoesTravel}
+            name="how_does_travel"
+            singleSelect
+            other
+            required
+          />
+          <YesNoCheckbox
+            checkboxObject={setGoOutAlone}
+            name="can_go_out_alone"
+            labelText="c. When going out, can he/she go out alone?"
+            textBoxOnNo={
+              <Textbox
+                state={goOutAloneNo}
+                setState={setGoOutAloneNo}
+                id="why_not_go_out_alone"
+                name="why_not_go_out_alone"
+                labelText={`If "NO," explain why he/she can't go out alone.`}
+                textarea
+                limit={99}
+                required
+              />
+            }
+            required
+          />
+          <YesNoCheckbox
+            checkboxObject={setDisableDriving}
+            name="can_go_out_alone"
+            labelText="d. Does the disabled person drive?"
+            textBoxOnNo={
+              <Textbox
+                state={disableDrivingNo}
+                setState={setDisableDrivingNo}
+                id="why_not_go_out_alone"
+                name="why_not_go_out_alone"
+                labelText="If he/she doesn't drive, explain why not."
+                textarea
+                limit={200}
+                required
+              />
+            }
+            required
+          />
+        </>
+      )}
 
       <div className="flex flex-row justify-evenly">
         <button
