@@ -83,6 +83,9 @@ export default function WorkingForm() {
   const [needReminder, setNeedReminder] = useState([]);
   const [needAccommodation, setNeedAccommodation] = useState([]);
   const [oftenVisit, setOftenVisit] = useState("");
+  const [problemGettingAlong, setProblemGettingAlong] = useState([]);
+  const [problemGettingAlongYes, setProblemGettingAlongYes] = useState("");
+  const [changeInSocial, setChangeInSocial] = useState("");
 
   const jotformObject = {
     q190_1Name: disableName,
@@ -161,6 +164,9 @@ export default function WorkingForm() {
     q433_doesHeshe: needReminder,
     q434_doYou434: needAccommodation,
     q435_howOften435: oftenVisit,
+    q436_dDo436: problemGettingAlong,
+    q438_ifyes438: problemGettingAlongYes,
+    q439_eDescribe439: changeInSocial,
   };
 
   // If checkbox yes with textbox has no, then remove the answers of yes textbox
@@ -249,6 +255,11 @@ export default function WorkingForm() {
       setHandleMoneyYes("");
     }
   }, [handleMoney]);
+  useEffect(() => {
+    if (problemGettingAlong.includes("No")) {
+      setProblemGettingAlongYes("");
+    }
+  }, [problemGettingAlong]);
 
   // If checkbox no with textbox has yes, then remove the answers of no textbox
   useEffect(() => {
@@ -1048,7 +1059,36 @@ export default function WorkingForm() {
         labelText="Does he/she need someone to accompany him/her?"
         required
       />
-
+      <YesNoCheckbox
+        checkboxObject={setProblemGettingAlong}
+        name="problem_getting_along"
+        labelText="d. Does this person have any problems getting along with family, friends, neighbors, or others?"
+        textBoxOnYes={
+          <Textbox
+            state={problemGettingAlongYes}
+            setState={setProblemGettingAlongYes}
+            id="problem_getting_along_yes"
+            name="problem_getting_along_yes"
+            labelText='If "YES," explain.'
+            textarea
+            limit={98}
+            rows={2}
+            required
+          />
+        }
+        required
+      />
+      <Textbox
+        id="changeInSocial"
+        name="changeInSocial"
+        state={changeInSocial}
+        setState={setChangeInSocial}
+        labelText="e. Describe any changes in social activities since the illnesses, injuries, or conditions began."
+        textarea
+        limit={276}
+        rows={3}
+        required
+      />
       <div className="flex flex-row justify-evenly">
         <button
           className="jotform-submit"
