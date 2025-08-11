@@ -62,6 +62,19 @@ export default function WorkingForm() {
   const [goOutAloneNo, setGoOutAloneNo] = useState("");
   const [disableDriving, setDisableDriving] = useState([]);
   const [disableDrivingNo, setDisableDrivingNo] = useState("");
+  const [disableShopping, setDisableShopping] = useState([]);
+  const [disableDoShopping, setDisableDoShopping] = useState(null);
+  const [whatShops, setWhatShops] = useState("");
+  const [howLongShop, setHowLongShop] = useState("");
+  const [payBills, setPayBills] = useState([]);
+  const [savingAccounts, setsavingAccounts] = useState([]);
+  const [countChange, setcountChange] = useState([]);
+  const [useCheckbook, setuseCheckbook] = useState([]);
+  const [no_money, setNoMoney] = useState("");
+  const [handleMoney, setHandleMoney] = useState([]);
+  const [handleMoneyYes, setHandleMoneyYes] = useState("");
+  const [hobbies, setHobbies] = useState("");
+  const [wellhobbies, setWellHobbies] = useState("");
 
   const jotformObject = {
     q190_1Name: disableName,
@@ -119,6 +132,18 @@ export default function WorkingForm() {
     q409_ifno: goOutAloneNo,
     q408_dDoes: disableDriving,
     q410_ifYou410: disableDrivingNo,
+    q486_doesThe: disableShopping,
+    q412_aIf: disableDoShopping,
+    q413_bDescribe: whatShops,
+    q414_cHow: howLongShop,
+    q416_payBills: payBills,
+    q417_handleA: savingAccounts,
+    q418_countChange: countChange,
+    q419_useA: useCheckbook,
+    q421_explainAll: no_money,
+    q420_useA420: handleMoney,
+    q422_ifyes422: handleMoneyYes,
+    q425_aWhat: hobbies,
   };
 
   // If checkbox yes with textbox has no, then remove the answers of yes textbox
@@ -195,6 +220,18 @@ export default function WorkingForm() {
       setDisableDrivingNo("");
     }
   }, [doesGoOutside]);
+  useEffect(() => {
+    if (disableShopping.includes("No")) {
+      setDisableDoShopping(null);
+      setWhatShops("");
+      setHowLongShop("");
+    }
+  }, [disableShopping]);
+  useEffect(() => {
+    if (handleMoney.includes("No")) {
+      setHandleMoneyYes("");
+    }
+  }, [handleMoney]);
 
   // If checkbox no with textbox has yes, then remove the answers of no textbox
   useEffect(() => {
@@ -218,6 +255,19 @@ export default function WorkingForm() {
       setDisableDrivingNo("");
     }
   }, [disableDriving]);
+
+  useEffect(() => {
+    const everyYes = [
+      ...payBills,
+      ...savingAccounts,
+      ...countChange,
+      ...useCheckbook,
+    ];
+    // Check if every item is yes
+    if (everyYes.every((item) => item === "Yes")) {
+      setNoMoney("");
+    }
+  }, [payBills, savingAccounts, countChange, useCheckbook]);
 
   const convertObject = () => {
     const data = FlattenData(jotformObject);
@@ -764,6 +814,128 @@ export default function WorkingForm() {
           />
         </>
       )}
+
+      <FormLabel id="house_and_work">19. SHOPPING</FormLabel>
+
+      <YesNoCheckbox
+        checkboxObject={setDisableShopping}
+        labelText="Does the disabled person do shopping?"
+        required
+        name="disable_shopping"
+      />
+      {disableShopping.includes("Yes") && (
+        <>
+          <CheckboxGroup
+            checkboxObject={setDisableDoShopping}
+            options={["In stores", "By phone", "By mail", "By computer"]}
+            labelText="a. If the disabled person does any shopping, does he/she shop: (Check all that apply.)"
+            name="disable_do_shopping"
+            required
+          />
+          <Textbox
+            id="what_shops"
+            name="what_shops"
+            state={whatShops}
+            setState={setWhatShops}
+            labelText="b. Describe what he/she shops for."
+            textarea
+            limit={200}
+            rows={2}
+            required
+          />
+          <Textbox
+            id="how_long_shop"
+            name="how_long_shop"
+            state={howLongShop}
+            setState={setHowLongShop}
+            labelText="c. How often does he/she shop and how long does it take?"
+            textarea
+            limit={300}
+            rows={3}
+            required
+          />
+        </>
+      )}
+
+      <FormLabel id="money_questions">20. MONEY</FormLabel>
+      <FormLabel id="able_money">a. Is he/she able to:</FormLabel>
+
+      <YesNoCheckbox
+        checkboxObject={setPayBills}
+        labelText="Pay bills:"
+        name="pay_bills"
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setsavingAccounts}
+        labelText="Handle a savings account:"
+        name="saving_account"
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setcountChange}
+        labelText="Count change:"
+        name="count_change"
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setuseCheckbook}
+        labelText="Use a checkbook/money orders:"
+        name="checkbook"
+        required
+      />
+
+      {[
+        ...payBills,
+        ...savingAccounts,
+        ...countChange,
+        ...useCheckbook,
+      ].includes("No") && (
+        <Textbox
+          id="money_questions_no"
+          name="money_questions_no"
+          state={no_money}
+          setState={setNoMoney}
+          labelText='Explain all "NO" answers.'
+          textarea
+          limit={200}
+          rows={2}
+          required
+        />
+      )}
+
+      <YesNoCheckbox
+        checkboxObject={setHandleMoney}
+        labelText="b. Has the disabled person's ability to handle money changed since the illnesses, injuries, or conditions began?"
+        name="handle_money"
+        textBoxOnYes={
+          <Textbox
+            state={handleMoneyYes}
+            setState={setHandleMoneyYes}
+            id="handle_money_yes"
+            name="handle_money_yes"
+            labelText='If "YES," explain how the ability to handle money has changed'
+            textarea
+            limit={300}
+            rows={3}
+            required
+          />
+        }
+        required
+      />
+
+      <FormLabel id="hobbies_interests">21. HOBBIES AND INTERESTS</FormLabel>
+      <Textbox
+        id="hobbies"
+        name="hobbies"
+        state={hobbies}
+        setState={setHobbies}
+        labelText="a. What are his/her hobbies and interests? (For example, reading, watching TV, sewing, playing sports, etc.)"
+        textarea
+        limit={300}
+        rows={3}
+        required
+      />
 
       <div className="flex flex-row justify-evenly">
         <button

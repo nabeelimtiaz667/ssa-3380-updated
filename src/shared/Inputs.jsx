@@ -100,6 +100,7 @@ const CheckboxGroup = ({
   checkboxObject,
   labelText = "",
   name = "",
+  gridCols = 3,
 }) => {
   const [selected, setSelected] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -137,7 +138,7 @@ const CheckboxGroup = ({
       <FormLabel id={`label_for_${name}`}>
         {labelText} {required && <Required />}
       </FormLabel>
-      <div className="checkbox-group grid grid-cols-3 gap-4">
+      <div className={`checkbox-group grid grid-cols-${gridCols} gap-4`}>
         {checkOptions.map((option) => (
           <label key={option} style={{ display: "block" }}>
             <input
