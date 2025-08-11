@@ -75,6 +75,14 @@ export default function WorkingForm() {
   const [handleMoneyYes, setHandleMoneyYes] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [wellhobbies, setWellHobbies] = useState("");
+  const [activityChange, setActivityChange] = useState("");
+  const [disableSpentTime, setDisableSpentTime] = useState(null);
+  const [doingThingsWithOthers, setDoingThingsWithOthers] = useState("");
+  const [doingThingsOften, setDoingThingsOften] = useState("");
+  const [listVisitingPlaces, setListVistingPlaces] = useState("");
+  const [needReminder, setNeedReminder] = useState([]);
+  const [needAccommodation, setNeedAccommodation] = useState([]);
+  const [oftenVisit, setOftenVisit] = useState("");
 
   const jotformObject = {
     q190_1Name: disableName,
@@ -144,6 +152,15 @@ export default function WorkingForm() {
     q420_useA420: handleMoney,
     q422_ifyes422: handleMoneyYes,
     q425_aWhat: hobbies,
+    q426_bHow426: wellhobbies,
+    q427_cDescribe: activityChange,
+    q429_aHow429: disableSpentTime,
+    q430_bDescribe430: doingThingsWithOthers,
+    q431_howOften431: doingThingsOften,
+    q431_howOften431: listVisitingPlaces,
+    q433_doesHeshe: needReminder,
+    q434_doYou434: needAccommodation,
+    q435_howOften435: oftenVisit,
   };
 
   // If checkbox yes with textbox has no, then remove the answers of yes textbox
@@ -934,6 +951,101 @@ export default function WorkingForm() {
         textarea
         limit={300}
         rows={3}
+        required
+      />
+      <Textbox
+        id="well_hobbies"
+        name="well_hobbies"
+        state={wellhobbies}
+        setState={setWellHobbies}
+        labelText="b. How often and how well does he/she do these things?"
+        textarea
+        limit={300}
+        rows={3}
+        required
+      />
+      <Textbox
+        id="activityChange"
+        name="activityChange"
+        state={activityChange}
+        setState={setActivityChange}
+        labelText="c. Describe any changes in these activities since the illnesses, injuries, or conditions began."
+        textarea
+        limit={300}
+        rows={3}
+        required
+      />
+
+      <FormLabel id="hobbies_interests">22. SOCIAL ACTIVITIES</FormLabel>
+
+      <CheckboxGroup
+        checkboxObject={setDisableSpentTime}
+        options={[
+          "In person",
+          "On the phone",
+          "Email",
+          "Texting",
+          "Mail",
+          "Video Chat (for example Skype or Facetime)",
+        ]}
+        labelText="a. How does the disabled person spend time with others? (Check all that apply.)"
+        name="disable_spent_time"
+        other
+        required
+      />
+      <Textbox
+        id="doingThingsWithOthers"
+        name="doingThingsWithOthers"
+        state={doingThingsWithOthers}
+        setState={setDoingThingsWithOthers}
+        labelText="b. Describe the kinds of things he/she does with others."
+        textarea
+        limit={100}
+        rows={2}
+        required
+      />
+      <Textbox
+        id="doingThingsOften"
+        name="doingThingsOften"
+        state={doingThingsOften}
+        setState={setDoingThingsOften}
+        labelText="How often does he/she do these things?"
+        textarea
+        limit={48}
+        required
+      />
+      <Textbox
+        id="listVisitingPlaces"
+        name="listVisitingPlaces"
+        state={listVisitingPlaces}
+        setState={setListVistingPlaces}
+        labelText="c. List the places he/she goes on a regular basis. (For example, church, community center, sports events, social groups, etc.)"
+        textarea
+        limit={276}
+        rows={3}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setNeedReminder}
+        name="need_reminder"
+        labelText="Does he/she need to be reminded to go places?"
+        required
+      />
+      <Textbox
+        id="oftenVisit"
+        name="oftenVisit"
+        state={oftenVisit}
+        setState={setOftenVisit}
+        labelText="How often does he/she go and how much does he/she take part?"
+        textarea
+        limit={276}
+        rows={3}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setNeedAccommodation}
+        name="need_accommodation"
+        labelText="Does he/she need someone to accompany him/her?"
         required
       />
 
