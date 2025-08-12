@@ -6,6 +6,40 @@ import axios from "axios";
 import DatePicker from "../shared/DatePicker";
 
 export default function WorkingForm() {
+  const disableConditions = [
+    "Lifting",
+    "Standing",
+    "Sitting",
+    "Hearing",
+    "Memory",
+    "Understanding",
+    "Getting Along With Others",
+    "Squatting",
+    "Reaching",
+    "Kneeling",
+    "Stair Climbing",
+    "Completing Tasks",
+    "Following Instructions",
+    "Bending",
+    "Walking",
+    "Talking",
+    "Seeing",
+    "Concentration",
+    "Using Hands",
+  ];
+  const disableUseCases = [
+    "Crutches",
+    "Walker",
+    "Wheelchair",
+    "None",
+    "Cane",
+    "Brace/Splint",
+    "Artificial Limb",
+    "Hearing Aid",
+    "Glasses/Contact Lenses",
+    "Artificial Voice Box",
+  ];
+
   const [disableName, setDisableName] = useState("");
   const [yourName, setYourName] = useState("");
   const [relationship, setRelationship] = useState("");
@@ -86,6 +120,55 @@ export default function WorkingForm() {
   const [problemGettingAlong, setProblemGettingAlong] = useState([]);
   const [problemGettingAlongYes, setProblemGettingAlongYes] = useState("");
   const [changeInSocial, setChangeInSocial] = useState("");
+  const [disableCondition, setDisableCondition] = useState([]);
+  const [explainConditions, setExplainConditions] = useState("");
+  const [isDisabled, setIsDisabled] = useState([]);
+  const [payAttention, setPayAttention] = useState("");
+  const [doesFinish, setDoesFinish] = useState([]);
+  const [wrritenInstructions, setWrritenInstructions] = useState("");
+  const [spokenInstructions, setSpokenInstructions] = useState("");
+  const [wellWithAuthorities, setWellWithAuthorities] = useState("");
+  const [firedFromJob, setFiredFromJob] = useState([]);
+  const [firedFromJobYesExplain, setFiredFromJobYesExplain] = useState("");
+  const [firedFromJobYesEmployer, setFiredFromJobYesEmployer] = useState("");
+  const [handleStress, setHandleStress] = useState("");
+  const [handleChangeRoutine, setHandleChangeRoutine] = useState("");
+  const [unusual, setUnusual] = useState([]);
+  const [unusualYes, setUnusualYes] = useState("");
+  const [disableUses, setDisableUses] = useState(null);
+  const [disableUsesYesWhich, setDisableUsesYesWhich] = useState("");
+  const [disableUsesYesWhenPrescribed, setDisableUsesYesWhenPrescribed] =
+    useState("");
+  const [disableUsesYesWhenNeed, setDisableUsesYesWhenNeed] = useState("");
+  const [disableTakeMedicine, setDisableTakeMedicine] = useState([]);
+  const [medicineSideeffect, setMedicineSideeffect] = useState([]);
+  const [nameOfMedicine_1, setNameOfMedicine_1] = useState("");
+  const [nameOfMedicine_2, setNameOfMedicine_2] = useState("");
+  const [nameOfMedicine_3, setNameOfMedicine_3] = useState("");
+  const [nameOfMedicine_4, setNameOfMedicine_4] = useState("");
+  const [nameEffectOfMedicine_1, setNameEffectOfMedicine_1] = useState("");
+  const [nameEffectOfMedicine_2, setNameEffectOfMedicine_2] = useState("");
+  const [nameEffectOfMedicine_3, setNameEffectOfMedicine_3] = useState("");
+  const [nameEffectOfMedicine_4, setNameEffectOfMedicine_4] = useState("");
+  const [remarks, setRemarks] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [province, setProvince] = useState("");
+  const [postal, setPostal] = useState("");
+
+  const disableUseCondition = () => {
+    if (disableUses) {
+      if (Object.keys(disableUses).length > 0) {
+        if (!Object.values(disableUses).includes("None")) {
+          return true;
+        }
+        return false;
+      }
+      return false;
+    }
+    return false;
+  };
 
   const jotformObject = {
     q190_1Name: disableName,
@@ -160,13 +243,54 @@ export default function WorkingForm() {
     q429_aHow429: disableSpentTime,
     q430_bDescribe430: doingThingsWithOthers,
     q431_howOften431: doingThingsOften,
-    q431_howOften431: listVisitingPlaces,
+    q432_cList: listVisitingPlaces,
     q433_doesHeshe: needReminder,
     q434_doYou434: needAccommodation,
     q435_howOften435: oftenVisit,
     q436_dDo436: problemGettingAlong,
     q438_ifyes438: problemGettingAlongYes,
     q439_eDescribe439: changeInSocial,
+    q442_23A: disableCondition,
+    q444_pleaseExplain: explainConditions,
+    q445_bIs: isDisabled,
+    q449_dFor: payAttention,
+    q450_eDoes: doesFinish,
+    q451_fHow: wrritenInstructions,
+    q452_gHow: spokenInstructions,
+    q453_hHow: wellWithAuthorities,
+    q455_iHas: firedFromJob,
+    q454_ifyes454: firedFromJobYesExplain,
+    q456_ifyes456: firedFromJobYesEmployer,
+    q457_jHow: handleStress,
+    q460_kHow: handleChangeRoutine,
+    q461_lHave: unusual,
+    q462_ifyes462: unusualYes,
+    q463_24Does: disableUses,
+    q464_whichOf: disableUsesYesWhich,
+    q465_whenWas: disableUsesYesWhenPrescribed,
+    q466_whenDoes: disableUsesYesWhenNeed,
+    q467_25Does: disableTakeMedicine,
+    q470_if: medicineSideeffect,
+    // The upcoming 8 enteries will be of medicine names and its side effects
+    q472_1Name472: nameOfMedicine_1,
+    q474_2Name: nameOfMedicine_2,
+    q476_3Name: nameOfMedicine_3,
+    q478_4Name: nameOfMedicine_4,
+    q473_1Side: nameEffectOfMedicine_1,
+    q475_2Side: nameEffectOfMedicine_2,
+    q477_3Side: nameEffectOfMedicine_3,
+    q479_4Side: nameEffectOfMedicine_4,
+    q313_typeA: remarks,
+    q317_name317: yourName,
+    q483_date: date,
+    q484_emailAddress: email,
+    q319_mailingAddress: {
+      addr_line1: address,
+      addr_line2: "",
+      city: city,
+      state: province,
+      postal: postal,
+    },
   };
 
   // If checkbox yes with textbox has no, then remove the answers of yes textbox
@@ -260,6 +384,56 @@ export default function WorkingForm() {
       setProblemGettingAlongYes("");
     }
   }, [problemGettingAlong]);
+  useEffect(() => {
+    if (firedFromJob.includes("No")) {
+      setFiredFromJobYesExplain("");
+      setFiredFromJobYesEmployer("");
+    }
+  }, [firedFromJob]);
+  useEffect(() => {
+    if (unusual.includes("No")) {
+      setUnusualYes("");
+    }
+  }, [unusual]);
+  useEffect(() => {
+    if (disableTakeMedicine.includes("No")) {
+      setMedicineSideeffect([]);
+      setNameOfMedicine_1("");
+      setNameOfMedicine_2("");
+      setNameOfMedicine_3("");
+      setNameOfMedicine_4("");
+
+      setNameEffectOfMedicine_1("");
+      setNameEffectOfMedicine_2("");
+      setNameEffectOfMedicine_3("");
+      setNameEffectOfMedicine_4("");
+    }
+  }, [disableTakeMedicine]);
+  useEffect(() => {
+    if (medicineSideeffect.includes("No")) {
+      setNameOfMedicine_1("");
+      setNameOfMedicine_2("");
+      setNameOfMedicine_3("");
+      setNameOfMedicine_4("");
+
+      setNameEffectOfMedicine_1("");
+      setNameEffectOfMedicine_2("");
+      setNameEffectOfMedicine_3("");
+      setNameEffectOfMedicine_4("");
+    }
+  }, [medicineSideeffect]);
+
+  // Custom conditions
+  useEffect(() => {
+    if (!disableCondition.length > 0) setExplainConditions("");
+  }, [disableCondition]);
+  useEffect(() => {
+    if (!disableUseCondition()) {
+      setDisableUsesYesWhich("");
+      setDisableUsesYesWhenPrescribed("");
+      setDisableUsesYesWhenNeed("");
+    }
+  }, [disableUses]);
 
   // If checkbox no with textbox has yes, then remove the answers of no textbox
   useEffect(() => {
@@ -336,6 +510,7 @@ export default function WorkingForm() {
         state={disableName}
         setState={setDisableName}
         labelText="1. Name of Disabled Person"
+        placeholder="First, Middle, Last, Suffix"
         required
       />
       <Textbox
@@ -344,6 +519,7 @@ export default function WorkingForm() {
         state={yourName}
         setState={setYourName}
         labelText="2. Your Name"
+        placeholder="Person completing this form"
         required
       />
       <Textbox
@@ -643,9 +819,7 @@ export default function WorkingForm() {
         }
         required
       />
-
       <FormLabel id="meals">16. MEALS</FormLabel>
-
       <YesNoCheckbox
         checkboxObject={setPrepareMeals}
         labelText="a. Does the disabled person prepare his/her own meals?"
@@ -703,9 +877,7 @@ export default function WorkingForm() {
         }
         required
       />
-
       <FormLabel id="house_and_work">17. HOUSE AND YARD WORK</FormLabel>
-
       <YesNoCheckbox
         checkboxObject={setDoHousehold}
         labelText="Do the disabled person do household and yard work?"
@@ -756,9 +928,7 @@ export default function WorkingForm() {
         }
         required
       />
-
       <FormLabel id="house_and_work">18. GETTING AROUND</FormLabel>
-
       <YesNoCheckbox
         checkboxObject={setDoesGoOutside}
         labelText="Does this person go outside?"
@@ -778,7 +948,6 @@ export default function WorkingForm() {
         }
         required
       />
-
       {doesGoOutside.includes("Yes") && (
         <>
           <Textbox
@@ -842,9 +1011,7 @@ export default function WorkingForm() {
           />
         </>
       )}
-
       <FormLabel id="house_and_work">19. SHOPPING</FormLabel>
-
       <YesNoCheckbox
         checkboxObject={setDisableShopping}
         labelText="Does the disabled person do shopping?"
@@ -884,10 +1051,8 @@ export default function WorkingForm() {
           />
         </>
       )}
-
       <FormLabel id="money_questions">20. MONEY</FormLabel>
       <FormLabel id="able_money">a. Is he/she able to:</FormLabel>
-
       <YesNoCheckbox
         checkboxObject={setPayBills}
         labelText="Pay bills:"
@@ -912,7 +1077,6 @@ export default function WorkingForm() {
         name="checkbook"
         required
       />
-
       {[
         ...payBills,
         ...savingAccounts,
@@ -931,7 +1095,6 @@ export default function WorkingForm() {
           required
         />
       )}
-
       <YesNoCheckbox
         checkboxObject={setHandleMoney}
         labelText="b. Has the disabled person's ability to handle money changed since the illnesses, injuries, or conditions began?"
@@ -951,7 +1114,6 @@ export default function WorkingForm() {
         }
         required
       />
-
       <FormLabel id="hobbies_interests">21. HOBBIES AND INTERESTS</FormLabel>
       <Textbox
         id="hobbies"
@@ -986,9 +1148,7 @@ export default function WorkingForm() {
         rows={3}
         required
       />
-
       <FormLabel id="hobbies_interests">22. SOCIAL ACTIVITIES</FormLabel>
-
       <CheckboxGroup
         checkboxObject={setDisableSpentTime}
         options={[
@@ -1089,6 +1249,358 @@ export default function WorkingForm() {
         rows={3}
         required
       />
+      <CheckboxGroup
+        checkboxObject={setDisableCondition}
+        options={disableConditions}
+        labelText="23. a. Check any of the following items the disabled person's illnesses, injuries, or conditions affect:"
+        name="disable_condition"
+        required
+      />
+      {disableCondition.length > 0 && (
+        <Textbox
+          labelText="Please explain how his/her illnesses, injuries, or conditions affect each of the items you checked. (For example, he/she can only lift [how many pounds], or he/she can only walk [how far])"
+          state={explainConditions}
+          setState={setExplainConditions}
+          id="explain_conditions"
+          name="explain_conditions"
+          textarea
+          limit={368}
+          rows={4}
+          required
+        />
+      )}
+      <CheckboxGroup
+        checkboxObject={setIsDisabled}
+        options={["Right Handed?", "Left Handed?"]}
+        labelText="b. Is the disabled person:"
+        name="is_disabled"
+        id="is_disabled"
+        required
+      />
+      <Textbox
+        labelText="d. For how long can the disabled person pay attention?"
+        state={payAttention}
+        setState={setPayAttention}
+        id="pay_attention"
+        name="pay_attention"
+        textarea
+        limit={37}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setDoesFinish}
+        labelText="e. Does the disabled person finish what he/she starts? (For example, a conversation, chores, reading, watching a movie.)"
+        name="does_finish"
+        required
+      />
+      <Textbox
+        id="wrritenInstructions"
+        name="wrritenInstructions"
+        state={wrritenInstructions}
+        setState={setWrritenInstructions}
+        labelText="f. How well does the disabled person follow written instructions? (For example, a recipe.)"
+        textarea
+        limit={276}
+        rows={3}
+        required
+      />
+      <Textbox
+        id="spokenInstructions"
+        name="spokenInstructions"
+        state={spokenInstructions}
+        setState={setSpokenInstructions}
+        labelText="g. How well does the disabled person follow spoken instructions?"
+        textarea
+        limit={276}
+        rows={3}
+        required
+      />
+      <Textbox
+        state={wellWithAuthorities}
+        setState={setWellWithAuthorities}
+        labelText="h. How well does the disabled person get along with authority figures? (For example, police, bosses, landlords or teachers.)"
+        id="wellWithAuthorities"
+        name="wellWithAuthorities"
+        textarea
+        limit={95}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setFiredFromJob}
+        labelText="i. Has he/she ever been fired or laid off from a job because of problems getting along with other people?"
+        name="fired_from_job"
+        textBoxOnYes={
+          <>
+            <Textbox
+              id="firedFromJobYesExplain"
+              name="firedFromJobYesExplain"
+              state={firedFromJobYesExplain}
+              setState={setFiredFromJobYesExplain}
+              labelText='If "YES," please explain.'
+              limit={92}
+              rows={2}
+              textarea
+              required
+            />
+            <Textbox
+              id="firedFromJobYesEmployer"
+              name="firedFromJobYesEmployer"
+              state={firedFromJobYesEmployer}
+              setState={setFiredFromJobYesEmployer}
+              labelText='If "YES," please give name of employer.'
+              limit={53}
+              textarea
+              required
+            />
+          </>
+        }
+        required
+      />
+      <Textbox
+        state={handleStress}
+        setState={setHandleStress}
+        id="handleStress"
+        name="handleStress"
+        labelText="j. How well does the disabled person handle stress?"
+        textarea
+        limit={188}
+        rows={3}
+        required
+      />
+      <Textbox
+        state={handleChangeRoutine}
+        setState={setHandleChangeRoutine}
+        id="handleChangeRoutine"
+        name="handleChangeRoutine"
+        labelText="k. How well does he/she handle changes in routine?"
+        textarea
+        limit={188}
+        rows={3}
+        required
+      />
+      <YesNoCheckbox
+        checkboxObject={setUnusual}
+        labelText="l. Have you noticed any unusual behavior or fears in the disabled person?"
+        name="unusual_behavior_or_fear"
+        textBoxOnYes={
+          <Textbox
+            id="list_unusual_behavior_or_fear"
+            name="list_unusual_behavior_or_fear"
+            state={unusualYes}
+            setState={setUnusualYes}
+            labelText='If "YES," please explain.'
+            limit={270}
+            rows={3}
+            textarea
+            required
+          />
+        }
+        required
+      />
+      <CheckboxGroup
+        checkboxObject={setDisableUses}
+        options={disableUseCases}
+        labelText="24. Does the disabled person use any of the following? (Check all that apply.)"
+        name="disable_uses"
+        other
+        required
+      />
+      {disableUseCondition() && (
+        <>
+          <Textbox
+            labelText="Which of these were prescribed by a doctor? If you do not know or do not recall, please write that."
+            state={disableUsesYesWhich}
+            setState={setDisableUsesYesWhich}
+            id="which_prescribed"
+            name="which_prescribed"
+            textarea
+            limit={184}
+            rows={3}
+          />
+          <Textbox
+            labelText="When was it prescribed? If you do not know or do not recall, please write that."
+            state={disableUsesYesWhenPrescribed}
+            setState={setDisableUsesYesWhenPrescribed}
+            id="when_prescribed"
+            name="when_prescribed"
+            textarea
+            limit={276}
+            rows={4}
+          />
+          <Textbox
+            labelText="When does this person need to use these aids?"
+            state={disableUsesYesWhenNeed}
+            setState={setDisableUsesYesWhenNeed}
+            id="when_need"
+            name="when_need"
+            textarea
+            limit={368}
+            rows={4}
+          />
+        </>
+      )}
+      <YesNoCheckbox
+        checkboxObject={setDisableTakeMedicine}
+        labelText="25. Does the disabled person currently take any medicines for his/her illnesses, injuries, or conditions?"
+        name="disable_take_medicine"
+        textBoxOnYes={
+          <YesNoCheckbox
+            checkboxObject={setMedicineSideeffect}
+            labelText='If " YES," do any of the medicines cause side effects?'
+            name="disable_take_medicine_yes"
+            required
+          />
+        }
+        required
+      />
+      {medicineSideeffect.includes("Yes") && (
+        <>
+          <div className="">
+            If "YES," please explain. (Do not list all of the medicines that the
+            disabled person takes. List only the medicines that cause side
+            effects for the disabled person.)
+          </div>
+          <div className="flex flex-row gap-2">
+            <Textbox
+              id="medicine_1"
+              name="medicine_name"
+              containerClass="flex-1"
+              state={nameOfMedicine_1}
+              setState={setNameOfMedicine_1}
+              labelText="1. Name of Medicine"
+            />
+            <Textbox
+              id="effect_1"
+              name="effect_name"
+              containerClass="flex-1"
+              state={nameEffectOfMedicine_1}
+              setState={setNameEffectOfMedicine_1}
+              labelText="Side effect Person has"
+            />
+          </div>
+          <div className="flex flex-row gap-2">
+            <Textbox
+              id="medicine_2"
+              name="medicine_name"
+              containerClass="flex-1"
+              state={nameOfMedicine_2}
+              setState={setNameOfMedicine_2}
+              labelText="2. Name of Medicine"
+            />
+            <Textbox
+              id="effect_2"
+              name="effect_name"
+              containerClass="flex-1"
+              state={nameEffectOfMedicine_2}
+              setState={setNameEffectOfMedicine_2}
+              labelText="Side effect Person has"
+            />
+          </div>
+          <div className="flex flex-row gap-2">
+            <Textbox
+              id="medicine_3"
+              name="medicine_name"
+              containerClass="flex-1"
+              state={nameOfMedicine_3}
+              setState={setNameOfMedicine_3}
+              labelText="3. Name of Medicine"
+            />
+            <Textbox
+              id="effect_3"
+              name="effect_name"
+              containerClass="flex-1"
+              state={nameEffectOfMedicine_3}
+              setState={setNameEffectOfMedicine_3}
+              labelText="Side effect Person has"
+            />
+          </div>
+          <div className="flex flex-row gap-2">
+            <Textbox
+              id="medicine_4"
+              name="medicine_name"
+              containerClass="flex-1"
+              state={nameOfMedicine_4}
+              setState={setNameOfMedicine_4}
+              labelText="4. Name of Medicine"
+            />
+            <Textbox
+              id="effect_4"
+              name="effect_name"
+              containerClass="flex-1"
+              state={nameEffectOfMedicine_4}
+              setState={setNameEffectOfMedicine_4}
+              labelText="Side effect Person has"
+            />
+          </div>
+        </>
+      )}
+      <div className="">
+        Use this section for any added information you did not show in earlier
+        parts of this form. When you are done with this section (or if you
+        didn't have anything to add), be sure to complete the fields at the
+        bottom of this page.
+      </div>
+      <Textbox
+        id="remarks"
+        state={remarks}
+        setState={setRemarks}
+        textarea
+        limit={1748}
+        rows={15}
+      />
+      <Textbox
+        type="email"
+        id="user_email"
+        name="user_email"
+        state={email}
+        setState={setEmail}
+        labelText="Email address of the person who is completing this form:"
+        placeholder="example@example.com"
+      />
+      <div className="flex flex-col gap-2">
+        <FormLabel>
+          MAILING ADDRESS (Street or PO Box) Include the apartment number, if
+          applicable.
+          <span className="text-red-500">*</span>
+        </FormLabel>
+        <Textbox
+          id="addressLine"
+          name="addressLine"
+          state={address}
+          setState={setAddress}
+          hint="Number and Street"
+          required
+        />
+        <div className="flex flex-row space-x-4 w-full">
+          <Textbox
+            id="cityName"
+            name="cityName"
+            containerClass="flex-1"
+            state={city}
+            setState={setCity}
+            hint="City"
+            required
+          />
+          <Textbox
+            id="provinceName"
+            name="provinceName"
+            containerClass="flex-1"
+            state={province}
+            setState={setProvince}
+            hint="State / Province"
+            required
+          />
+        </div>
+        <Textbox
+          id="postal"
+          name="postal"
+          state={postal}
+          setState={setPostal}
+          hint="Postal / Zip Code"
+          required
+        />
+      </div>
+
       <div className="flex flex-row justify-evenly">
         <button
           className="jotform-submit"

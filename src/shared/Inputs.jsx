@@ -25,6 +25,7 @@ const ErrorText = ({ condition, text = "Enter this field" }) => {
 };
 
 const Textbox = ({
+  type = "text",
   name = "",
   id = "",
   placeholder = "",
@@ -70,7 +71,7 @@ const Textbox = ({
         </>
       ) : (
         <input
-          type="text"
+          type={type}
           className={className}
           name={name}
           id={id}
@@ -110,7 +111,10 @@ const CheckboxGroup = ({
     if (!selected) return;
     if (selected.includes("other")) {
       if (selected.length > 1) {
-        checkboxObject({ ...selected, other: otherText });
+        checkboxObject({
+          ...selected.filter((val) => val !== "other"),
+          other: otherText,
+        });
       } else {
         checkboxObject({ other: otherText });
       }
@@ -138,7 +142,7 @@ const CheckboxGroup = ({
       <FormLabel id={`label_for_${name}`}>
         {labelText} {required && <Required />}
       </FormLabel>
-      <div className={`checkbox-group grid grid-cols-${gridCols} gap-4`}>
+      <div className={`checkbox-group grid grid-cols-${gridCols}`}>
         {checkOptions.map((option) => (
           <label key={option} style={{ display: "block" }}>
             <input
