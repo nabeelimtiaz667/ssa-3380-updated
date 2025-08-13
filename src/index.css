@@ -10,6 +10,25 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: #2563eb;
+  --secondary-color: #f9fafb;
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+  --input-bg: #ffffff;
+  --chat-user-bg: #dbeafe;
+  --chat-user-text: #1e40af;
+  --chat-avatar-bg: #d1fae5;
+  --chat-avatar-text: #065f46;
+  --error-bg: #fee2e2;
+  --error-text: #b91c1c;
+}
+
+body {
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
 a {
@@ -20,14 +39,6 @@ a {
 
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  min-height: 100vh;
 }
 
 h1 {

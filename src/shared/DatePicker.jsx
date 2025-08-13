@@ -46,6 +46,7 @@ const DatePicker = ({
       </FormLabel>
       <input
         id={id}
+        className="form-input"
         type="date"
         value={`${dateState.year}-${dateState.month}-${dateState.day}`}
         onChange={handleChange}

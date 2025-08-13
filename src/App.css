@@ -1,5 +1,5 @@
 .working-form {
-    margin: 5rem 0;
+    /* margin: 5rem 0; */
 }
 
 .form-group {
@@ -31,4 +31,112 @@
 
 .jotform-submit:active {
     background-color: #3f5086;
+}
+
+.form-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-header {
+    background-color: var(--section-header-bg);
+    color: var(--text-color);
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+}
+
+.section-number {
+    background-color: white;
+    color: var(--primary-color);
+    border-radius: 9999px;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 0.75rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    color: var(--label-text);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    resize: vertical;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.checkbox-label:hover {
+    border-color: var(--primary-color);
+}
+
+.checkbox-input {
+    margin-right: 0.75rem;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-text {
+    font-size: 0.875rem;
+    color: var(--text-color);
+}
+
+.interactive-form-controller {
+    height: 70vh;
 }

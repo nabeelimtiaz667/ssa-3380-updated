@@ -54,17 +54,17 @@ const Textbox = ({
       {textarea ? (
         <>
           <textarea
-            className={className}
+            className="form-textarea"
             name={name}
             id={id}
             placeholder={placeholder}
             onChange={onChange}
             aria-labelledby={labelCondition ? `label_${id}` : ""}
-            rows={rows}
+            rows={rows + 1}
             value={state}
           ></textarea>
           {limit && (
-            <span className="text-sm text-gray-800">
+            <span className="text-sm text-white">
               {state.length}/{limit}
             </span>
           )}
@@ -72,7 +72,7 @@ const Textbox = ({
       ) : (
         <input
           type={type}
-          className={className}
+          className="form-input"
           name={name}
           id={id}
           placeholder={placeholder}
@@ -81,7 +81,7 @@ const Textbox = ({
           value={state}
         />
       )}
-      {hint.length > 0 && <span className="text-xs text-gray-800">{hint}</span>}
+      {hint.length > 0 && <span className="text-xs text-white">{hint}</span>}
       {required && <ErrorText condition={() => state.length > 0} />}
       {limit && (
         <ErrorText
@@ -144,10 +144,14 @@ const CheckboxGroup = ({
       </FormLabel>
       <div className={`checkbox-group grid grid-cols-${gridCols}`}>
         {checkOptions.map((option) => (
-          <label key={option} style={{ display: "block" }}>
+          <label
+            className="checkbox-label"
+            key={option}
+            style={{ display: "block" }}
+          >
             <input
               type="checkbox"
-              className="mr-1"
+              className="checkbox-input mr-1"
               checked={
                 singleSelect
                   ? selected[0] === option
@@ -156,7 +160,9 @@ const CheckboxGroup = ({
               onChange={() => handleChange(option)}
               value={option}
             />
-            {option === "other" ? "Other" : option}
+            <span className="checkbox-text">
+              {option === "other" ? "Other" : option}
+            </span>
           </label>
         ))}
       </div>
@@ -201,15 +207,19 @@ const YesNoCheckbox = ({
       </FormLabel>
       <div className="checkbox-group grid grid-cols-3 gap-4">
         {checkOptions.map((option) => (
-          <label key={option} style={{ display: "block" }}>
+          <label
+            className="checkbox-label"
+            key={option}
+            style={{ display: "block" }}
+          >
             <input
               type="checkbox"
-              className="mr-1"
+              className="checkbox-input mr-1"
               checked={selected[0] === option}
               onChange={() => handleChange(option)}
               value={option}
             />
-            {option}
+            <span className="checkbox-text">{option}</span>
           </label>
         ))}
       </div>

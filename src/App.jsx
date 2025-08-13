@@ -1,11 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import WorkingForm from "./views/WorkingForm";
+import InteractiveAvatar from "./views/InteractiveAvatar";
+import InteractiveSessions from "./views/InteractiveSessions";
+import JotForm from "./views/JotForm";
 
 function App() {
   return (
-    <div className="app flex flex-col w-2xl">
-      <WorkingForm />
-    </div>
+    <Router>
+      <Routes>
+        {/* Default route (home page) */}
+        <Route path="/" element={<InteractiveSessions />} />
+        <Route path="/avatar" element={<InteractiveAvatar />} />
+        <Route path="/form-mock" element={<JotForm />} />
+      </Routes>
+    </Router>
   );
 }
 
