@@ -134,9 +134,9 @@
 
 .checkbox-text {
     font-size: 0.875rem;
-    color: var(--text-color);
+    color: var(--primary-color);
 }
 
 .interactive-form-controller {
-    height: 70vh;
+    height: 77vh;
 }

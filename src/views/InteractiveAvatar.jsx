@@ -571,8 +571,8 @@ const InteractiveAvatar = () => {
             )}
           </button>
         </div>
-        <div className="flex max-w-[1780px] mx-auto w-full gap-4 h-[calc(100vh-200px)]">
-          <div className="md:max-w-[50%] w-full">
+        <div className="flex flex-col lg:flex-row max-w-[1780px] mx-auto w-full gap-4 h-[calc(100vh-200px)]">
+          <div className="lg:max-w-1/2 w-full">
             <div className="bg-[var(--card-bg)] rounded-xl shadow-xl h-full flex flex-col">
               <div className="flex-1 bg-[var(--secondary-color)] relative rounded-t-2xl">
                 <video
@@ -747,7 +747,7 @@ const InteractiveAvatar = () => {
               </div>
             </div>
           </div>
-          <div className="md:max-w-[50%] w-full">
+          <div className="lg:max-w-1/2 w-full">
             {showForm ? (
               // <MultiStepForm
               //    onSubmit={submitFormData}

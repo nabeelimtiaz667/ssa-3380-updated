@@ -1,12 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { CheckboxGroup, Textbox, YesNoCheckbox } from "../shared/Inputs";
+import StreamingAvatar, {
+  AvatarQuality,
+  StreamingEvents,
+  TaskMode,
+  TaskType,
+  VoiceEmotion,
+  STTProvider,
+} from "@heygen/streaming-avatar";
 import FormLabel from "../shared/Label";
 import FlattenData from "../utils/FlattenData";
 import axios from "axios";
 import DatePicker from "../shared/DatePicker";
 import FormContainer from "../shared/FormContainer";
 
-export default function JotForm() {
+export default function JotForm({ avatarRef }) {
   const disableConditions = [
     "Lifting",
     "Standing",
@@ -40,6 +48,7 @@ export default function JotForm() {
     "Glasses/Contact Lenses",
     "Artificial Voice Box",
   ];
+  const [validationAttempted, setValidationAttempted] = useState(false);
 
   const [disableName, setDisableName] = useState("");
   const [yourName, setYourName] = useState("");
@@ -472,6 +481,20 @@ export default function JotForm() {
     }
   }, [payBills, savingAccounts, countChange, useCheckbook]);
 
+  const speak = async (message) => {
+    if (avatarRef.current) {
+      try {
+        await avatarRef.current.speak({
+          text: message,
+          taskType: TaskType.TALK,
+          taskMode: TaskMode.SYNC,
+        });
+      } catch (error) {
+        console.error("Error speaking:", error);
+      }
+    }
+  };
+
   const [allSections, setAllSections] = useState([
     "block",
     "none",
@@ -489,16 +512,258 @@ export default function JotForm() {
     "none",
   ]);
   const getThisSection = (sectionNo) => allSections[sectionNo - 1];
-  const onPrev = () => {
+  const onPrev = async () => {
     const currentIndex = allSections.findIndex((disp) => disp === "block");
+
     if (currentIndex > 0) {
       allSections[currentIndex - 1] = "block";
       allSections[currentIndex] = "none";
       setAllSections([...allSections]);
     }
   };
-  const onNext = () => {
+  // const validateForm = () => {
+  //   let isValid = true;
+  //   if (getThisSection(1) === "block") {
+  //     // Section 1: Basic Information
+  //     if (!disableName.trim()) isValid = false;
+  //     if (!yourName.trim()) isValid = false;
+  //     if (!relationship.trim()) isValid = false;
+  //     if (!date || Object.keys(date).length === 0) isValid = false;
+  //     if (!areacode.trim() || !phone.trim()) isValid = false;
+  //     if (!numberType) isValid = false;
+  //     if (!knowDisable.trim()) isValid = false;
+  //     if (!whereDisableLive) isValid = false;
+  //     if (!withWhomDisableLive) isValid = false;
+  //   }
+
+  //   if (getThisSection(2) === "block") {
+  //     // Section 2: Daily Activities and Care
+  //     if (!limitAbility.trim()) isValid = false;
+  //     if (!whatDisableDo.trim()) isValid = false;
+  //     if (!doesTakeCare || doesTakeCare.length === 0) isValid = false;
+  //     if (doesTakeCare.includes("Yes") && !takeCareYes.trim()) isValid = false;
+  //     if (!takePetCare || takePetCare.length === 0) isValid = false;
+  //     if (takePetCare.includes("Yes") && !petCareYes.trim()) isValid = false;
+  //     if (!helpTakeCare || helpTakeCare.length === 0) isValid = false;
+  //     if (helpTakeCare.includes("Yes") && !helpTakeCareYes.trim())
+  //       isValid = false;
+  //   }
+
+  //   if (getThisSection(3) === "block") {
+  //     if (!whatDoBefore.trim()) isValid = false;
+  //     if (!effectSleep || effectSleep.length === 0) isValid = false;
+  //     if (effectSleep.includes("Yes") && !effectSleepYes.trim())
+  //       isValid = false;
+
+  //     // Section 3: Personal Care
+  //     if (!takePersonalCare || takePersonalCare.length === 0) isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Dressing") &&
+  //       !takePersonalCareYesDress.trim()
+  //     )
+  //       isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Bathing") &&
+  //       !takePersonalCareYesBathe.trim()
+  //     )
+  //       isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Hair Care") &&
+  //       !takePersonalCareYesHair.trim()
+  //     )
+  //       isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Shaving") &&
+  //       !takePersonalCareYesShave.trim()
+  //     )
+  //       isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Feeding") &&
+  //       !takePersonalCareYesFeed.trim()
+  //     )
+  //       isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Toileting") &&
+  //       !takePersonalCareYesToilet.trim()
+  //     )
+  //       isValid = false;
+  //     if (
+  //       takePersonalCare.includes("Other") &&
+  //       !takePersonalCareYesOther.trim()
+  //     )
+  //       isValid = false;
+
+  //     // Section 4: Reminders and Meals
+  //     if (!specialReminders || specialReminders.length === 0) isValid = false;
+  //     if (specialReminders.includes("Yes") && !specialRemindersYes.trim())
+  //       isValid = false;
+  //     if (!medicineReminders || medicineReminders.length === 0) isValid = false;
+  //     if (medicineReminders.includes("Yes") && !medicineRemindersYes.trim())
+  //       isValid = false;
+  //   }
+
+  //   if (getThisSection(4) === "block") {
+  //     if (!prepareMeals || prepareMeals.length === 0) isValid = false;
+  //     if (
+  //       prepareMeals.includes("Yes") &&
+  //       (!prepareMealsYesFoodKind.trim() ||
+  //         !prepareMealsYesFoodOften.trim() ||
+  //         !prepareMealsYesHowLong.trim() ||
+  //         !prepareMealsYesHabitChange.trim())
+  //     )
+  //       isValid = false;
+  //     if (prepareMeals.includes("No") && !prepareMealsNo.trim())
+  //       isValid = false;
+
+  //     // Section 5: Household and Mobility
+  //     if (!doHousehold || doHousehold.length === 0) isValid = false;
+  //     if (
+  //       doHousehold.includes("Yes") &&
+  //       (!doHouseholdYesListChores.trim() ||
+  //         !doHouseholdYesChoreTime.trim() ||
+  //         doHouseholdYesEncourage.length === 0)
+  //     )
+  //       isValid = false;
+  //     if (
+  //       doHouseholdYesEncourage.includes("Yes") &&
+  //       !doHouseholdYesEncourageYes.trim()
+  //     )
+  //       isValid = false;
+  //   }
+
+  //   if (getThisSection(5) === "block")
+  //   if (!doesGoOutside || doesGoOutside.length === 0) isValid = false;
+  //   if (doesGoOutside.includes("No") && !doesGoOutsideNo.trim())
+  //     isValid = false;
+  //   if (!howdoesTravel) isValid = false;
+  //   if (!goOutAlone || goOutAlone.length === 0) isValid = false;
+  //   if (goOutAlone.includes("No") && !goOutAloneNo.trim()) isValid = false;
+  //   if (!disableDriving || disableDriving.length === 0) isValid = false;
+  //   if (disableDriving.includes("No") && !disableDrivingNo.trim())
+  //     isValid = false;
+
+  //   // Section 6: Shopping and Finances
+  //   if (!disableShopping || disableShopping.length === 0) isValid = false;
+  //   if (!disableDoShopping) isValid = false;
+  //   if (!payBills || payBills.length === 0) isValid = false;
+  //   if (!savingAccounts || savingAccounts.length === 0) isValid = false;
+  //   if (!countChange || countChange.length === 0) isValid = false;
+  //   if (!useCheckbook || useCheckbook.length === 0) isValid = false;
+  //   if (!handleMoney || handleMoney.length === 0) isValid = false;
+  //   if (handleMoney.includes("Yes") && !handleMoneyYes.trim()) isValid = false;
+
+  //   // Section 7: Social Activities
+  //   if (!hobbies.trim()) isValid = false;
+  //   if (!wellhobbies.trim()) isValid = false;
+  //   if (!activityChange.trim()) isValid = false;
+  //   if (!disableSpentTime) isValid = false;
+  //   if (!doingThingsWithOthers.trim()) isValid = false;
+  //   if (!doingThingsOften.trim()) isValid = false;
+  //   if (!listVisitingPlaces.trim()) isValid = false;
+  //   if (!needReminder || needReminder.length === 0) isValid = false;
+  //   if (!needAccommodation || needAccommodation.length === 0) isValid = false;
+  //   if (!problemGettingAlong || problemGettingAlong.length === 0)
+  //     isValid = false;
+  //   if (problemGettingAlong.includes("Yes") && !problemGettingAlongYes.trim())
+  //     isValid = false;
+  //   if (!changeInSocial.trim()) isValid = false;
+
+  //   // Section 8: Medical and Work
+  //   if (!disableCondition || disableCondition.length === 0) isValid = false;
+  //   if (!explainConditions.trim()) isValid = false;
+  //   if (!isDisabled || isDisabled.length === 0) isValid = false;
+  //   if (!payAttention.trim()) isValid = false;
+  //   if (!doesFinish || doesFinish.length === 0) isValid = false;
+  //   if (!wrritenInstructions.trim()) isValid = false;
+  //   if (!spokenInstructions.trim()) isValid = false;
+  //   if (!wellWithAuthorities.trim()) isValid = false;
+  //   if (!firedFromJob || firedFromJob.length === 0) isValid = false;
+  //   if (
+  //     firedFromJob.includes("Yes") &&
+  //     (!firedFromJobYesExplain.trim() || !firedFromJobYesEmployer.trim())
+  //   )
+  //     isValid = false;
+  //   if (!handleStress.trim()) isValid = false;
+  //   if (!handleChangeRoutine.trim()) isValid = false;
+  //   if (!unusual || unusual.length === 0) isValid = false;
+  //   if (unusual.includes("Yes") && !unusualYes.trim()) isValid = false;
+
+  //   // Section 9: Medication
+  //   if (!disableUses) isValid = false;
+  //   if (!disableTakeMedicine || disableTakeMedicine.length === 0)
+  //     isValid = false;
+  //   if (!medicineSideeffect || medicineSideeffect.length === 0) isValid = false;
+
+  //   // Contact Information
+  //   if (!address.trim()) isValid = false;
+  //   if (!city.trim()) isValid = false;
+  //   if (!province.trim()) isValid = false;
+  //   if (!postal.trim()) isValid = false;
+
+  //   return isValid;
+  // };
+  const onNext = async () => {
+    setValidationAttempted(true);
+    // if (!validateForm()) {
+    //   alert("Fill empty fields");
+    //   return;
+    // }
     const currentIndex = allSections.findIndex((disp) => disp === "block");
+    var message = "";
+    switch (currentIndex) {
+      case 0:
+        await speak("Enter some basic bio information.");
+        break;
+      case 1:
+        await speak(
+          "Provide details about disable person's daily routine, abilities, responsibilities and family status."
+        );
+        break;
+      case 2:
+        await speak(
+          "Explain us the details about any reminders the person require."
+        );
+        break;
+      case 3:
+        await speak("Tell us about the person's household activities.");
+        break;
+      case 4:
+        await speak("Write about the person's outdoor activities.");
+        break;
+      case 5:
+        await speak("Tell us about the person's money handling abilities.");
+        break;
+      case 6:
+        await speak(
+          "Provide us details about person's hobbies, interests and social activities."
+        );
+        break;
+      case 7:
+        await speak("Tell us more about the person's social skills.");
+        break;
+      case 8:
+        await speak(
+          "Explain about person's current effects of their illness, injuries or conditions."
+        );
+        break;
+      case 9:
+        await speak("Provide details about person's decision making details.");
+        break;
+      case 10:
+        await speak("Tell's about the person's stress management and fears.");
+        break;
+      case 11:
+        await speak(
+          "Provide the information about current disability aids the person utilizes."
+        );
+        break;
+      case 12:
+        await speak("Mention any medicine prescription with side effects.");
+        break;
+      case 13:
+        await speak("Enter your mailing address and information.");
+        break;
+    }
     if (currentIndex < allSections.length - 1) {
       allSections[currentIndex + 1] = "block";
       allSections[currentIndex] = "none";
@@ -547,6 +812,7 @@ export default function JotForm() {
           setState={setDisableName}
           labelText="1. Name of Disabled Person"
           placeholder="First, Middle, Last, Suffix"
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -556,6 +822,7 @@ export default function JotForm() {
           setState={setYourName}
           labelText="2. Your Name"
           placeholder="Person completing this form"
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -564,6 +831,7 @@ export default function JotForm() {
           state={relationship}
           setState={setRelationship}
           labelText="3. RELATIONSHIP (To disabled person)"
+          showAllErrors={validationAttempted}
           required
         />
         <DatePicker
@@ -572,6 +840,7 @@ export default function JotForm() {
           dateState={date}
           setDateState={setDate}
           labelText="4. Date of Form Filling"
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-col gap-2">
@@ -586,6 +855,7 @@ export default function JotForm() {
               setState={setAreacode}
               placeholder="212"
               hint="Area Code"
+              showAllErrors={validationAttempted}
               required
             />
             <Textbox
@@ -596,6 +866,7 @@ export default function JotForm() {
               containerClass="grow-[2]"
               placeholder="555-5555"
               hint="Phone Number"
+              showAllErrors={validationAttempted}
               required
             />
           </div>
@@ -604,6 +875,7 @@ export default function JotForm() {
             name="primary_num_type"
             checkboxObject={setNumberType}
             singleSelect
+            showAllErrors={validationAttempted}
             required
           />
         </div>
@@ -615,6 +887,7 @@ export default function JotForm() {
           labelText="6. a. How long have you known the disabled person?"
           textarea
           limit={45}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -640,6 +913,7 @@ export default function JotForm() {
           labelText="7. a. Where does the disabled person live? (Check one.)"
           singleSelect
           other
+          showAllErrors={validationAttempted}
           required
         />
         <CheckboxGroup
@@ -649,11 +923,12 @@ export default function JotForm() {
           labelText="b. With whom does he/she live? (Check one.)"
           singleSelect
           other
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -670,6 +945,7 @@ export default function JotForm() {
           rows={4}
           textarea
           limit={400}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -681,10 +957,12 @@ export default function JotForm() {
           rows={4}
           textarea
           limit={400}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setDoesTakeCare}
+          name="does_person_care"
           labelText="10. Does this person take care of anyone else such as a wife/husband, children, grandchildren, parents, friend, other?"
           textBoxOnYes={
             <Textbox
@@ -696,12 +974,15 @@ export default function JotForm() {
               textarea
               limit={300}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
+          name="animal_care"
           checkboxObject={setTakePetCare}
           labelText="11. Does he/she take care of pets or other animals?"
           textBoxOnYes={
@@ -714,12 +995,15 @@ export default function JotForm() {
               textarea
               limit={200}
               rows={2}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
+          name="help_care_animal"
           checkboxObject={setHelpTakeCare}
           labelText="12. Does anyone help this person care for other people or animals?"
           textBoxOnYes={
@@ -732,9 +1016,11 @@ export default function JotForm() {
               textarea
               limit={300}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -745,7 +1031,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -762,11 +1048,13 @@ export default function JotForm() {
           rows={3}
           textarea
           limit={300}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setEffectSleep}
           labelText="14. Do the illnesses, injuries, or conditions affect his/her sleep?"
+          name="effect_sleep"
           textBoxOnYes={
             <Textbox
               state={effectSleepYes}
@@ -777,14 +1065,17 @@ export default function JotForm() {
               textarea
               limit={300}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setTakePersonalCare}
           labelText="15. PERSONAL CARE: Does the disabled person have PROBLEMS with personal care?"
+          name="problem_with_care"
           textBoxOnYes={
             <>
               <FormLabel id="take_personal_care">
@@ -843,10 +1134,12 @@ export default function JotForm() {
               })}
             </>
           }
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setSpecialReminders}
+          name="need_special_reminders"
           labelText="b. Does he/she need any special reminders to take care of personal needs and grooming?"
           textBoxOnYes={
             <Textbox
@@ -858,12 +1151,15 @@ export default function JotForm() {
               textarea
               limit={276}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
+          name="medicine_reminders"
           checkboxObject={setMedicineReminders}
           labelText="c. Does he/she need help or reminders taking medicine?"
           textBoxOnYes={
@@ -876,9 +1172,11 @@ export default function JotForm() {
               textarea
               limit={276}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -889,7 +1187,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -899,6 +1197,7 @@ export default function JotForm() {
       <FormContainer display={getThisSection(4)}>
         <FormLabel id="meals">16. MEALS</FormLabel>
         <YesNoCheckbox
+          name="prepare_own_meals"
           checkboxObject={setPrepareMeals}
           labelText="a. Does the disabled person prepare his/her own meals?"
           textBoxOnYes={[
@@ -936,6 +1235,7 @@ export default function JotForm() {
                 labelText={item.label}
                 textarea
                 limit={92}
+                showAllErrors={validationAttempted}
                 required
               />
             );
@@ -950,9 +1250,11 @@ export default function JotForm() {
               textarea
               limit={200}
               rows={2}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <FormLabel id="house_and_work">17. HOUSE AND YARD WORK</FormLabel>
@@ -971,6 +1273,7 @@ export default function JotForm() {
                 textarea
                 limit={200}
                 rows={2}
+                showAllErrors={validationAttempted}
                 required
               />
               <Textbox
@@ -982,6 +1285,7 @@ export default function JotForm() {
                 textarea
                 limit={200}
                 rows={2}
+                showAllErrors={validationAttempted}
                 required
               />
               <YesNoCheckbox
@@ -997,13 +1301,16 @@ export default function JotForm() {
                     labelText='If "YES," what help is needed?'
                     textarea
                     limit={100}
+                    showAllErrors={validationAttempted}
                     required
                   />
                 }
+                showAllErrors={validationAttempted}
                 required
               />
             </>
           }
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1014,7 +1321,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1037,9 +1344,11 @@ export default function JotForm() {
               textarea
               limit={198}
               rows={2}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         {doesGoOutside.includes("Yes") && (
@@ -1050,6 +1359,7 @@ export default function JotForm() {
               state={howOftenOutside}
               setState={setHowOftenOutside}
               labelText="a. How often does this person go outside?"
+              showAllErrors={validationAttempted}
               required
             />
             <CheckboxGroup
@@ -1065,6 +1375,7 @@ export default function JotForm() {
               name="how_does_travel"
               singleSelect
               other
+              showAllErrors={validationAttempted}
               required
             />
             <YesNoCheckbox
@@ -1080,9 +1391,11 @@ export default function JotForm() {
                   labelText={`If "NO," explain why he/she can't go out alone.`}
                   textarea
                   limit={99}
+                  showAllErrors={validationAttempted}
                   required
                 />
               }
+              showAllErrors={validationAttempted}
               required
             />
             <YesNoCheckbox
@@ -1098,9 +1411,11 @@ export default function JotForm() {
                   labelText="If he/she doesn't drive, explain why not."
                   textarea
                   limit={200}
+                  showAllErrors={validationAttempted}
                   required
                 />
               }
+              showAllErrors={validationAttempted}
               required
             />
           </>
@@ -1113,7 +1428,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1125,6 +1440,7 @@ export default function JotForm() {
         <YesNoCheckbox
           checkboxObject={setDisableShopping}
           labelText="Does the disabled person do shopping?"
+          showAllErrors={validationAttempted}
           required
           name="disable_shopping"
         />
@@ -1135,6 +1451,7 @@ export default function JotForm() {
               options={["In stores", "By phone", "By mail", "By computer"]}
               labelText="a. If the disabled person does any shopping, does he/she shop: (Check all that apply.)"
               name="disable_do_shopping"
+              showAllErrors={validationAttempted}
               required
             />
             <Textbox
@@ -1146,6 +1463,7 @@ export default function JotForm() {
               textarea
               limit={200}
               rows={2}
+              showAllErrors={validationAttempted}
               required
             />
             <Textbox
@@ -1157,6 +1475,7 @@ export default function JotForm() {
               textarea
               limit={300}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           </>
@@ -1167,24 +1486,28 @@ export default function JotForm() {
           checkboxObject={setPayBills}
           labelText="Pay bills:"
           name="pay_bills"
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setsavingAccounts}
           labelText="Handle a savings account:"
           name="saving_account"
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setcountChange}
           labelText="Count change:"
           name="count_change"
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setuseCheckbook}
           labelText="Use a checkbook/money orders:"
           name="checkbook"
+          showAllErrors={validationAttempted}
           required
         />
         {[
@@ -1202,6 +1525,7 @@ export default function JotForm() {
             textarea
             limit={200}
             rows={2}
+            showAllErrors={validationAttempted}
             required
           />
         )}
@@ -1219,9 +1543,11 @@ export default function JotForm() {
               textarea
               limit={300}
               rows={3}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1232,7 +1558,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1250,6 +1576,7 @@ export default function JotForm() {
           textarea
           limit={300}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1261,6 +1588,7 @@ export default function JotForm() {
           textarea
           limit={300}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1272,6 +1600,7 @@ export default function JotForm() {
           textarea
           limit={300}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <FormLabel id="hobbies_interests">22. SOCIAL ACTIVITIES</FormLabel>
@@ -1288,6 +1617,7 @@ export default function JotForm() {
           labelText="a. How does the disabled person spend time with others? (Check all that apply.)"
           name="disable_spent_time"
           other
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1299,6 +1629,7 @@ export default function JotForm() {
           textarea
           limit={100}
           rows={2}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1309,6 +1640,7 @@ export default function JotForm() {
           labelText="How often does he/she do these things?"
           textarea
           limit={48}
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1319,7 +1651,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1336,12 +1668,14 @@ export default function JotForm() {
           textarea
           limit={276}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setNeedReminder}
           name="need_reminder"
           labelText="Does he/she need to be reminded to go places?"
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1353,12 +1687,14 @@ export default function JotForm() {
           textarea
           limit={276}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setNeedAccommodation}
           name="need_accommodation"
           labelText="Does he/she need someone to accompany him/her?"
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
@@ -1375,9 +1711,11 @@ export default function JotForm() {
               textarea
               limit={98}
               rows={2}
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1389,6 +1727,7 @@ export default function JotForm() {
           textarea
           limit={276}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1399,7 +1738,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1412,6 +1751,7 @@ export default function JotForm() {
           options={disableConditions}
           labelText="23. a. Check any of the following items the disabled person's illnesses, injuries, or conditions affect:"
           name="disable_condition"
+          showAllErrors={validationAttempted}
           required
         />
         {disableCondition.length > 0 && (
@@ -1424,6 +1764,7 @@ export default function JotForm() {
             textarea
             limit={368}
             rows={4}
+            showAllErrors={validationAttempted}
             required
           />
         )}
@@ -1433,6 +1774,7 @@ export default function JotForm() {
           labelText="b. Is the disabled person:"
           name="is_disabled"
           id="is_disabled"
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1443,12 +1785,14 @@ export default function JotForm() {
           name="pay_attention"
           textarea
           limit={37}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
           checkboxObject={setDoesFinish}
           labelText="e. Does the disabled person finish what he/she starts? (For example, a conversation, chores, reading, watching a movie.)"
           name="does_finish"
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1459,7 +1803,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1476,6 +1820,7 @@ export default function JotForm() {
           textarea
           limit={276}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1487,6 +1832,7 @@ export default function JotForm() {
           textarea
           limit={276}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1497,6 +1843,7 @@ export default function JotForm() {
           name="wellWithAuthorities"
           textarea
           limit={95}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
@@ -1514,6 +1861,7 @@ export default function JotForm() {
                 limit={92}
                 rows={2}
                 textarea
+                showAllErrors={validationAttempted}
                 required
               />
               <Textbox
@@ -1524,10 +1872,12 @@ export default function JotForm() {
                 labelText='If "YES," please give name of employer.'
                 limit={53}
                 textarea
+                showAllErrors={validationAttempted}
                 required
               />
             </>
           }
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1538,7 +1888,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1555,6 +1905,7 @@ export default function JotForm() {
           textarea
           limit={188}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <Textbox
@@ -1566,6 +1917,7 @@ export default function JotForm() {
           textarea
           limit={188}
           rows={3}
+          showAllErrors={validationAttempted}
           required
         />
         <YesNoCheckbox
@@ -1582,9 +1934,11 @@ export default function JotForm() {
               limit={270}
               rows={3}
               textarea
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         <div className="flex flex-row space-x-4">
@@ -1595,7 +1949,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1609,6 +1963,7 @@ export default function JotForm() {
           labelText="24. Does the disabled person use any of the following? (Check all that apply.)"
           name="disable_uses"
           other
+          showAllErrors={validationAttempted}
           required
         />
         {disableUseCondition() && (
@@ -1653,7 +2008,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1670,9 +2025,11 @@ export default function JotForm() {
               checkboxObject={setMedicineSideeffect}
               labelText='If " YES," do any of the medicines cause side effects?'
               name="disable_take_medicine_yes"
+              showAllErrors={validationAttempted}
               required
             />
           }
+          showAllErrors={validationAttempted}
           required
         />
         {medicineSideeffect.includes("Yes") && (
@@ -1764,7 +2121,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={onNext}
           >
             Next
@@ -1807,6 +2164,7 @@ export default function JotForm() {
             state={address}
             setState={setAddress}
             hint="Number and Street"
+            showAllErrors={validationAttempted}
             required
           />
           <div className="flex flex-row space-x-4 w-full">
@@ -1817,6 +2175,7 @@ export default function JotForm() {
               state={city}
               setState={setCity}
               hint="City"
+              showAllErrors={validationAttempted}
               required
             />
             <Textbox
@@ -1826,6 +2185,7 @@ export default function JotForm() {
               state={province}
               setState={setProvince}
               hint="State / Province"
+              showAllErrors={validationAttempted}
               required
             />
           </div>
@@ -1835,6 +2195,7 @@ export default function JotForm() {
             state={postal}
             setState={setPostal}
             hint="Postal / Zip Code"
+            showAllErrors={validationAttempted}
             required
           />
         </div>
@@ -1864,7 +2225,7 @@ export default function JotForm() {
             Back
           </button>
           <button
-            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-700 disabled:opacity-50 flex justify-center items-center"
+            className="flex-1 py-2 cursor-pointer px-4 bg-[var(--primary-color)] text-[var(--bg-color)] rounded-md hover:bg-blue-400 hover:text-[var(--primary-color)] disabled:opacity-50 flex justify-center items-center"
             onClick={sendData}
           >
             Send data to JotForm!

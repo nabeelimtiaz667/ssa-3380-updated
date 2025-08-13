@@ -5,19 +5,12 @@ const onTextChange = (e, setState) => setState(e.target.value);
 
 const Required = () => <span className="text-red-500">*</span>;
 
-const ErrorText = ({ condition, text = "Enter this field" }) => {
-  const hidden = useRef("hidden");
-  if (!condition()) {
-    hidden.current = "";
-  } else {
-    hidden.current = "hidden";
-  }
+const ErrorText = ({ condition, text = "Enter this field", showAllErrors }) => {
   return (
     <span
-      className={
-        "text-white bg-red-500 px-3 py-0.5 rounded-2xl mt-2 text-sm " +
-        hidden.current
-      }
+      className={`text-red-400 px-3 py-0.5 rounded-2xl mt-2 text-sm ${
+        showAllErrors && !condition() ? "" : "hidden"
+      }`}
     >
       {text}
     </span>
@@ -32,13 +25,13 @@ const Textbox = ({
   labelText = "",
   state,
   setState,
-  className = "",
   containerClass = "",
   textarea = false,
   rows = 1,
   limit = undefined,
   required = false,
   hint = "",
+  showAllErrors,
 }) => {
   const onChange = (e) => {
     onTextChange(e, setState);
@@ -64,7 +57,7 @@ const Textbox = ({
             value={state}
           ></textarea>
           {limit && (
-            <span className="text-sm text-white">
+            <span className="mt-1 text-sm text-[var(--primary-color)]">
               {state.length}/{limit}
             </span>
           )}
@@ -81,12 +74,21 @@ const Textbox = ({
           value={state}
         />
       )}
-      {hint.length > 0 && <span className="text-xs text-white">{hint}</span>}
-      {required && <ErrorText condition={() => state.length > 0} />}
+      {hint.length > 0 && (
+        <span className="mt-1 text-xs text-[var(--primary-color)]">{hint}</span>
+      )}
+      {required && (
+        <ErrorText
+          condition={() => state.length > 0}
+          text="Enter above field"
+          showAllErrors={showAllErrors}
+        />
+      )}
       {limit && (
         <ErrorText
           condition={() => state.length <= limit}
           text={`Max ${limit} characters`}
+          showAllErrors={showAllErrors}
         />
       )}
     </div>
@@ -102,6 +104,7 @@ const CheckboxGroup = ({
   labelText = "",
   name = "",
   gridCols = 3,
+  showAllErrors,
 }) => {
   const [selected, setSelected] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -142,7 +145,7 @@ const CheckboxGroup = ({
       <FormLabel id={`label_for_${name}`}>
         {labelText} {required && <Required />}
       </FormLabel>
-      <div className={`checkbox-group grid grid-cols-${gridCols}`}>
+      <div className={`checkbox-group grid grid-cols-${gridCols} gap-4`}>
         {checkOptions.map((option) => (
           <label
             className="checkbox-label"
@@ -151,7 +154,7 @@ const CheckboxGroup = ({
           >
             <input
               type="checkbox"
-              className="checkbox-input mr-1"
+              className="checkbox-input mr-1 rounded-sm"
               checked={
                 singleSelect
                   ? selected[0] === option
@@ -166,7 +169,13 @@ const CheckboxGroup = ({
           </label>
         ))}
       </div>
-      {required && <ErrorText condition={() => selected.length > 0} />}
+      {required && (
+        <ErrorText
+          condition={() => selected.length > 0}
+          text="Please check atleast one"
+          showAllErrors={showAllErrors}
+        />
+      )}
       {other && selected.includes("other") && (
         <Textbox
           state={otherText}
@@ -186,6 +195,7 @@ const YesNoCheckbox = ({
   required = false,
   textBoxOnYes,
   textBoxOnNo,
+  showAllErrors,
 }) => {
   const [selected, setSelected] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -214,7 +224,7 @@ const YesNoCheckbox = ({
           >
             <input
               type="checkbox"
-              className="checkbox-input mr-1"
+              className="checkbox-input mr-1 rounded-sm"
               checked={selected[0] === option}
               onChange={() => handleChange(option)}
               value={option}
@@ -223,7 +233,13 @@ const YesNoCheckbox = ({
           </label>
         ))}
       </div>
-      {required && <ErrorText condition={() => selected.length > 0} />}
+      {required && (
+        <ErrorText
+          condition={() => selected.length > 0}
+          text="Check either yes or no"
+          showAllErrors={showAllErrors}
+        />
+      )}
       {selected[0] === "Yes" && textBoxOnYes && <>{textBoxOnYes}</>}
       {selected[0] === "No" && textBoxOnNo && <>{textBoxOnNo}</>}
     </div>

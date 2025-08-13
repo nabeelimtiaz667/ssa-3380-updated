@@ -26,14 +26,13 @@ const WorkingForm = ({ avatarRef }) => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl text-[var(--primary-color)] md:text-5xl font-bold mb-4">
-            Work History Report
+            Adult Disability
           </h1>
           <p className="text-lg max-w-2xl text-[var(--primary-color)] mx-auto">
-            Please fill out this comprehensive work history form with accurate
-            information about your employment history.
+            Please fill out this form.
           </p>
         </div>
-        <JotForm />
+        <JotForm avatarRef={avatarRef} />
       </div>
     </div>
   );
