@@ -99,7 +99,7 @@ const InteractiveAvatar = () => {
   const API_KEY = import.meta.env.VITE_HEYGEN_API_KEY;
   const API_URL = import.meta.env.VITE_NEXT_PUBLIC_BASE_API_URL;
   const DEFAULT_AVATAR_ID = "3c592a67d01344f5b1d398d169e4b7d4";
-  const KNOWLEDGE_BASE_ID = "99988f6009b348b99b11e8a17dd939f9";
+  const KNOWLEDGE_BASE_ID = "700d19db5136447ebca08d506b2b0b2e";
 
   const updateActivity = () => {
     setLastActivityTime(Date.now());
@@ -350,7 +350,7 @@ const InteractiveAvatar = () => {
         knowledgeId: KNOWLEDGE_BASE_ID,
       });
       await avatarRef.current.speak({
-        text: "Hi there! I am here to virtually help and guide you through the Work History Report. Each section is needed and important to move forward with your case. When ready to begin, type or say: ‘Ready to begin’",
+        text: "Hi there! I am here to virtually help and guide you through the Third Party Adult Disability Application Form. Each section is needed and important to move forward with your case. When ready to begin, type or say: ‘Ready to begin’",
         taskType: TaskType.REPEAT,
         taskMode: TaskMode.SYNC,
       });
